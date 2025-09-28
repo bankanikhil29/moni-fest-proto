@@ -52,17 +52,17 @@ const VerificationSuccess = () => {
           {/* Success Animation */}
           <div className="mb-8">
             <div className="relative mx-auto w-32 h-32 mb-6">
-              <div className="absolute inset-0 bg-green-50 dark:bg-green-900/20 rounded-full animate-pulse"></div>
-              <div className="absolute inset-4 bg-green-100 dark:bg-green-900/40 rounded-full animate-pulse delay-75"></div>
-              <div className="absolute inset-8 bg-green-200 dark:bg-green-900/60 rounded-full flex items-center justify-center">
-                <CheckCircle className="h-12 w-12 text-green-600 animate-bounce" />
+              <div className="absolute inset-0 bg-accent/20 rounded-full animate-pulse verified-animation"></div>
+              <div className="absolute inset-4 bg-accent/40 rounded-full animate-pulse delay-75 verified-animation"></div>
+              <div className="absolute inset-8 bg-accent/60 rounded-full flex items-center justify-center verified-animation">
+                <CheckCircle className="h-12 w-12 text-white animate-bounce" />
               </div>
             </div>
             
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
               🎉 Congratulations!
             </h1>
-            <h2 className="text-2xl md:text-3xl font-semibold text-green-600 mb-4">
+            <h2 className="text-2xl md:text-3xl font-semibold text-accent mb-4">
               You're Now Verified!
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">

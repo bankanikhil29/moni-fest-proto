@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Moni-Fest Design System - All colors, gradients, fonts, etc defined here.
+/* Moni-Fest Design System - Manifest Collabs | Manifest Money
 All colors MUST be HSL.
 */
 
@@ -10,28 +10,28 @@ All colors MUST be HSL.
   :root {
     /* Core Brand Colors */
     --background: 0 0% 100%;
-    --foreground: 203 54% 23%; /* Navy Blue - Main text */
+    --foreground: 272 76% 32%; /* Purple - Main text */
 
     --card: 0 0% 100%;
-    --card-foreground: 203 54% 23%;
+    --card-foreground: 272 76% 32%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 203 54% 23%;
+    --popover-foreground: 272 76% 32%;
 
-    /* Navy Blue Primary (#1C3D5A) */
-    --primary: 203 54% 23%;
+    /* Purple Primary (#6B46C1) */
+    --primary: 272 76% 32%;
     --primary-foreground: 0 0% 100%;
-    --primary-hover: 203 54% 18%;
+    --primary-hover: 272 76% 28%;
 
-    /* Coral Pink Accent (#FF5A5F) */
-    --accent: 358 100% 68%;
+    /* Pink Accent (#EC4899) */
+    --accent: 328 85% 70%;
     --accent-foreground: 0 0% 100%;
-    --accent-hover: 358 100% 63%;
+    --accent-hover: 328 85% 65%;
 
-    /* Golden Yellow Highlight (#FACC15) */
-    --highlight: 48 96% 53%;
-    --highlight-foreground: 203 54% 23%;
-    --highlight-hover: 48 96% 48%;
+    /* Light Pink Highlight (#F9A8D4) */
+    --highlight: 328 73% 84%;
+    --highlight-foreground: 272 76% 32%;
+    --highlight-hover: 328 73% 80%;
 
     /* Secondary & Neutral Colors */
     --secondary: 210 20% 96%;
@@ -49,8 +49,9 @@ All colors MUST be HSL.
 
     /* Brand Gradients */
     --gradient-hero: linear-gradient(135deg, hsl(var(--accent)), hsl(var(--highlight)));
-    --gradient-cta: linear-gradient(90deg, hsl(var(--accent)), hsl(var(--highlight)));
+    --gradient-cta: linear-gradient(90deg, hsl(var(--accent)), hsl(var(--primary)));
     --gradient-subtle: linear-gradient(180deg, hsl(var(--background)), hsl(var(--secondary)));
+    --gradient-brand: linear-gradient(135deg, hsl(328 85% 70%), hsl(272 76% 32%));
 
     /* Shadows */
     --shadow-soft: 0 4px 20px -4px hsl(var(--primary) / 0.15);
@@ -77,39 +78,39 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 203 54% 8%;
+    --background: 272 76% 8%;
     --foreground: 0 0% 95%;
 
-    --card: 203 54% 12%;
+    --card: 272 76% 12%;
     --card-foreground: 0 0% 95%;
 
-    --popover: 203 54% 12%;
+    --popover: 272 76% 12%;
     --popover-foreground: 0 0% 95%;
 
-    --primary: 0 0% 95%;
-    --primary-foreground: 203 54% 23%;
-    --primary-hover: 0 0% 85%;
+    --primary: 328 85% 70%;
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 328 85% 65%;
 
-    --accent: 358 100% 68%;
+    --accent: 328 85% 70%;
     --accent-foreground: 0 0% 100%;
-    --accent-hover: 358 100% 63%;
+    --accent-hover: 328 85% 65%;
 
-    --highlight: 48 96% 53%;
-    --highlight-foreground: 203 54% 23%;
-    --highlight-hover: 48 96% 48%;
+    --highlight: 328 73% 84%;
+    --highlight-foreground: 272 76% 32%;
+    --highlight-hover: 328 73% 80%;
 
-    --secondary: 203 54% 15%;
+    --secondary: 272 76% 15%;
     --secondary-foreground: 0 0% 95%;
 
-    --muted: 203 54% 15%;
+    --muted: 272 76% 15%;
     --muted-foreground: 215 20% 65%;
 
     --destructive: 0 63% 31%;
     --destructive-foreground: 0 0% 95%;
 
-    --border: 203 54% 20%;
-    --input: 203 54% 20%;
-    --ring: 0 0% 95%;
+    --border: 272 76% 20%;
+    --input: 272 76% 20%;
+    --ring: 328 85% 70%;
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -144,6 +145,19 @@ All colors MUST be HSL.
 
   .cta-gradient {
     background: var(--gradient-cta);
+  }
+
+  .brand-gradient {
+    background: var(--gradient-brand);
+  }
+
+  .verified-animation {
+    animation: verifiedPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes verifiedPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
   }
 
   .card-floating {
