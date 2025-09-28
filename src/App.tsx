@@ -11,6 +11,7 @@ import GetStarted from "./pages/GetStarted";
 import CreatorDashboard from "./pages/CreatorDashboard";
 import BrandDashboard from "./pages/BrandDashboard";
 import ManagerDashboard from "./pages/ManagerDashboard";
+import CreatorProfile from "./pages/CreatorProfile";
 import CreatorBooking from "./pages/CreatorBooking";
 import PaymentPage from "./pages/PaymentPage";
 import NotFound from "./pages/NotFound";
@@ -32,6 +33,7 @@ const App = () => (
           <Route path="/creator-dashboard" element={<CreatorDashboard />} />
           <Route path="/brand-dashboard" element={<BrandDashboard />} />
           <Route path="/manager-dashboard" element={<ManagerDashboard />} />
+          <Route path="/creator-profile/:id" element={<CreatorProfile />} />
           <Route path="/creator-booking/:id" element={<CreatorBooking />} />
           <Route path="/payment/:id" element={<PaymentPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

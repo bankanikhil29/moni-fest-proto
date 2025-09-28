@@ -192,7 +192,7 @@ export default function FindCreators() {
                       <Button 
                         className="flex-1" 
                         variant="coral"
-                        onClick={() => window.location.href = `/creator-booking/${creator.id}`}
+                        onClick={() => window.location.href = `/creator-profile/${creator.id}`}
                       >
                         Contact Creator
                       </Button>
