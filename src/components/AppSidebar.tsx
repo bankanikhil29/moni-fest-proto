@@ -46,8 +46,8 @@ export function AppSidebar() {
       <SidebarContent>
         <div className="p-4 border-b">
           <a href="/" className="flex items-center gap-3 text-2xl font-bold" onClick={handleLinkClick}>
-            <img src={logo} alt="Moifest Logo" className="w-8 h-8" />
-            <span className="text-primary">Moifest</span>
+            <img src={logo} alt="Moni-Fest Logo" className="w-8 h-8" />
+            <span className="text-primary">Moni-Fest</span>
           </a>
         </div>
 
