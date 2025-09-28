@@ -10,6 +10,9 @@ import FindCreators from "./pages/FindCreators";
 import FindBrands from "./pages/FindBrands";
 import JoinAsCreator from "./pages/JoinAsCreator";
 import GetStarted from "./pages/GetStarted";
+import UserTypeSelection from "./pages/UserTypeSelection";
+import InfluencerProfileSetup from "./pages/InfluencerProfileSetup";
+import BrandProfileSetup from "./pages/BrandProfileSetup";
 import CreatorDashboard from "./pages/CreatorDashboard";
 import BrandDashboard from "./pages/BrandDashboard";
 import ManagerDashboard from "./pages/ManagerDashboard";
@@ -51,6 +54,9 @@ const AppLayout = () => {
       <Route path="/find-brands" element={<FindBrands />} />
       <Route path="/join-as-creator" element={<JoinAsCreator />} />
       <Route path="/get-started" element={<GetStarted />} />
+      <Route path="/user-type-selection" element={<UserTypeSelection />} />
+      <Route path="/influencer-setup" element={<InfluencerProfileSetup />} />
+      <Route path="/brand-setup" element={<BrandProfileSetup />} />
       <Route path="/creator-profile/:id" element={<CreatorProfile />} />
       <Route path="/creator-booking/:id" element={<CreatorBooking />} />
       <Route path="/payment/:id" element={<PaymentPage />} />

@@ -32,7 +32,7 @@ export default function Navigation() {
 
           <div className="hidden md:flex items-center space-x-4">
             <Button variant="ghost">Sign In</Button>
-            <Button variant="coral" size="sm" onClick={() => window.location.href = '/get-started'}>Get Started</Button>
+            <Button variant="coral" size="sm" onClick={() => window.location.href = '/user-type-selection'}>Get Started</Button>
           </div>
 
           <div className="md:hidden">
@@ -86,7 +86,7 @@ export default function Navigation() {
                     <Button variant="ghost" className="w-full justify-start">
                       Sign In
                     </Button>
-                    <Button variant="coral" className="w-full" onClick={() => window.location.href = '/get-started'}>
+                    <Button variant="coral" className="w-full" onClick={() => window.location.href = '/user-type-selection'}>
                       Get Started
                     </Button>
                   </div>
