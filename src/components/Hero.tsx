@@ -6,16 +6,16 @@ export default function Hero() {
     <section className="relative bg-gradient-to-br from-background via-background to-secondary py-20 lg:py-32 overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div className="text-center">
+          <div className="text-center lg:text-left">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
               Turn Your <span className="gradient-text">Creativity</span> Into <span className="gradient-text">Cash</span>{" "}
               <span className="text-primary">— No More Payment Drama!</span>
             </h1>
-            <p className="text-xl text-muted-foreground mb-8 max-w-2xl text-center">
+            <p className="text-xl text-muted-foreground mb-8 max-w-2xl text-center lg:text-left">
               A marketplace built for part-time and early-stage creators. Brands discover, 
               creators deliver — payments guaranteed through secure escrow.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <Button variant="coral" size="lg" className="text-lg px-8" onClick={() => window.location.href = '/find-creators'}>
                 Find Creators
               </Button>
@@ -26,7 +26,7 @@ export default function Hero() {
                 Join as a Creator
               </Button>
             </div>
-            <div className="mt-8 flex items-center gap-6 justify-center text-sm text-muted-foreground">
+            <div className="mt-8 flex items-center gap-6 justify-center lg:justify-start text-sm text-muted-foreground">
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-accent rounded-full"></div>
                 <span>Escrow Protected</span>
