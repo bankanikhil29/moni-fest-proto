@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
+import logo from "@/assets/logo.png";
 
 export default function Navigation() {
   return (
@@ -8,9 +9,9 @@ export default function Navigation() {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
-            <a href="/" className="text-2xl font-bold hover:opacity-80 transition-opacity cursor-pointer">
-              <span className="text-primary">Moni</span>
-              <span className="gradient-text">-Fest</span>
+            <a href="/" className="flex items-center gap-3 text-2xl font-bold hover:opacity-80 transition-opacity cursor-pointer">
+              <img src={logo} alt="Moifest Logo" className="w-8 h-8" />
+              <span className="text-primary">Moifest</span>
             </a>
           </div>
           
@@ -57,9 +58,9 @@ export default function Navigation() {
               <SheetContent side="left" className="w-80">
                 <div className="flex flex-col h-full">
                   <div className="py-4 border-b">
-                    <a href="/" className="text-2xl font-bold">
-                      <span className="text-primary">Moni</span>
-                      <span className="gradient-text">-Fest</span>
+                    <a href="/" className="flex items-center gap-3 text-2xl font-bold">
+                      <img src={logo} alt="Moifest Logo" className="w-8 h-8" />
+                      <span className="text-primary">Moifest</span>
                     </a>
                   </div>
                   

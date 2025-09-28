@@ -1,5 +1,6 @@
 import { Home, Users, Building, Search, UserPlus, LogIn, Sparkles } from "lucide-react";
 import { NavLink, useLocation } from "react-router-dom";
+import logo from "@/assets/logo.png";
 
 import {
   Sidebar,
@@ -44,9 +45,9 @@ export function AppSidebar() {
     <Sidebar className="md:hidden">
       <SidebarContent>
         <div className="p-4 border-b">
-          <a href="/" className="text-2xl font-bold" onClick={handleLinkClick}>
-            <span className="text-primary">Moni</span>
-            <span className="gradient-text">-Fest</span>
+          <a href="/" className="flex items-center gap-3 text-2xl font-bold" onClick={handleLinkClick}>
+            <img src={logo} alt="Moifest Logo" className="w-8 h-8" />
+            <span className="text-primary">Moifest</span>
           </a>
         </div>
 
