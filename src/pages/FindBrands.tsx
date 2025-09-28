@@ -43,6 +43,71 @@ const brands = [
     deliverables: ["4 Instagram Reels", "6 Story Posts", "1 IGTV"],
     logo: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=100&h=100&fit=crop",
     description: "Partner with health-conscious creators to promote our new line of organic, nutrient-packed snacks."
+  },
+  {
+    id: 4,
+    name: "GlowBeauty",
+    industry: "Beauty & Cosmetics",
+    campaignTitle: "Radiant Skin Campaign",
+    budget: "$2,500 - $6,000",
+    deadline: "2024-02-25",
+    lookingFor: ["Beauty Influencers", "Skincare Enthusiasts"],
+    requirements: "25K+ followers, beauty-focused content",
+    deliverables: ["4 Instagram Reels", "3 TikTok Videos", "2 Feed Posts"],
+    logo: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=100&h=100&fit=crop",
+    description: "Partner with beauty creators to showcase our new skincare line that promotes natural, radiant skin."
+  },
+  {
+    id: 5,
+    name: "FitLife Pro",
+    industry: "Health & Fitness",
+    campaignTitle: "30-Day Transformation",
+    budget: "$3,500 - $7,500",
+    deadline: "2024-03-01",
+    lookingFor: ["Fitness Trainers", "Health Coaches"],
+    requirements: "30K+ followers, fitness-focused content",
+    deliverables: ["6 Instagram Reels", "4 YouTube Videos", "3 Feed Posts"],
+    logo: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=100&h=100&fit=crop",
+    description: "Seeking fitness creators to document real transformations using our comprehensive workout and nutrition program."
+  },
+  {
+    id: 6,
+    name: "WanderLust Travel",
+    industry: "Travel & Tourism",
+    campaignTitle: "Hidden Gems Discovery",
+    budget: "$4,000 - $9,000",
+    deadline: "2024-02-28",
+    lookingFor: ["Travel Bloggers", "Adventure Creators"],
+    requirements: "35K+ followers, travel content, passport ready",
+    deliverables: ["8 Instagram Reels", "5 YouTube Videos", "4 Feed Posts"],
+    logo: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=100&h=100&fit=crop",
+    description: "Looking for travel creators to explore and showcase hidden destinations around the world with our travel packages."
+  },
+  {
+    id: 7,
+    name: "PetPal",
+    industry: "Pet Care",
+    campaignTitle: "Happy Pets, Happy Lives",
+    budget: "$1,800 - $4,000",
+    deadline: "2024-02-18",
+    lookingFor: ["Pet Influencers", "Animal Lovers"],
+    requirements: "20K+ followers, pet content, own pets",
+    deliverables: ["5 Instagram Reels", "3 TikTok Videos", "2 Feed Posts"],
+    logo: "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=100&h=100&fit=crop",
+    description: "Partner with pet-loving creators to showcase our premium pet care products and demonstrate happy, healthy pets."
+  },
+  {
+    id: 8,
+    name: "HomeDecor Plus",
+    industry: "Home & Lifestyle",
+    campaignTitle: "Cozy Home Makeover",
+    budget: "$2,200 - $5,500",
+    deadline: "2024-03-05",
+    lookingFor: ["Home Decorators", "DIY Creators"],
+    requirements: "18K+ followers, home decor content",
+    deliverables: ["4 Instagram Reels", "2 YouTube Tutorials", "3 Feed Posts"],
+    logo: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=100&h=100&fit=crop",
+    description: "Collaborate with home decor enthusiasts to transform spaces using our furniture and decor collections."
   }
 ];
 

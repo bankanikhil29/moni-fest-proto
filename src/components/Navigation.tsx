@@ -7,10 +7,10 @@ export default function Navigation() {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
-            <div className="text-2xl font-bold">
+            <a href="/" className="text-2xl font-bold hover:opacity-80 transition-opacity cursor-pointer">
               <span className="text-primary">Moni</span>
               <span className="gradient-text">-Fest</span>
-            </div>
+            </a>
           </div>
           
           <div className="hidden md:flex items-center space-x-8">

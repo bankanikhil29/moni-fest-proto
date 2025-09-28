@@ -46,6 +46,76 @@ const creators = [
     completedProjects: 156,
     avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face",
     portfolio: ["https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=200&h=200&fit=crop"]
+  },
+  {
+    id: 4,
+    name: "Alex Johnson",
+    handle: "@alexfitness",
+    followers: "52K",
+    location: "Miami, FL",
+    categories: ["Fitness", "Health"],
+    ratePerReel: "$180",
+    ratePerPost: "$110",
+    rating: 4.8,
+    completedProjects: 203,
+    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face",
+    portfolio: ["https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=200&fit=crop"]
+  },
+  {
+    id: 5,
+    name: "Zoe Williams",
+    handle: "@zoebeauty",
+    followers: "38K",
+    location: "Atlanta, GA",
+    categories: ["Beauty", "Skincare"],
+    ratePerReel: "$160",
+    ratePerPost: "$95",
+    rating: 4.9,
+    completedProjects: 178,
+    avatar: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=100&h=100&fit=crop&crop=face",
+    portfolio: ["https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=200&h=200&fit=crop"]
+  },
+  {
+    id: 6,
+    name: "David Park",
+    handle: "@davidtravels",
+    followers: "41K",
+    location: "Seattle, WA",
+    categories: ["Travel", "Photography"],
+    ratePerReel: "$170",
+    ratePerPost: "$105",
+    rating: 4.7,
+    completedProjects: 145,
+    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face",
+    portfolio: ["https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=200&h=200&fit=crop"]
+  },
+  {
+    id: 7,
+    name: "Maya Patel",
+    handle: "@mayacooks",
+    followers: "35K",
+    location: "Austin, TX",
+    categories: ["Food", "Cooking"],
+    ratePerReel: "$140",
+    ratePerPost: "$85",
+    rating: 4.8,
+    completedProjects: 189,
+    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop&crop=face",
+    portfolio: ["https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=200&h=200&fit=crop"]
+  },
+  {
+    id: 8,
+    name: "Ryan Mitchell",
+    handle: "@ryanmusic",
+    followers: "29K",
+    location: "Nashville, TN",
+    categories: ["Music", "Entertainment"],
+    ratePerReel: "$155",
+    ratePerPost: "$90",
+    rating: 4.6,
+    completedProjects: 112,
+    avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop&crop=face",
+    portfolio: ["https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=200&h=200&fit=crop"]
   }
 ];
 
