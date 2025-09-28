@@ -8,7 +8,7 @@ export default function Hero() {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="text-center lg:text-left">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-              Where <span className="gradient-text">Micro Creators</span> Meet Brands —{" "}
+              Where <span className="gradient-text">Micro Creators</span> Meet Brands{" "}
               <span className="text-primary">and Get Paid on Time.</span>
             </h1>
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl text-center">
