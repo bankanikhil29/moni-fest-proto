@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { SidebarTrigger } from "@/components/ui/sidebar";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Menu } from "lucide-react";
 
 export default function Navigation() {
   return (
@@ -47,7 +48,63 @@ export default function Navigation() {
           </div>
 
           <div className="md:hidden">
-            <SidebarTrigger />
+            <Sheet>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="icon">
+                  <Menu className="h-5 w-5" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="left" className="w-80">
+                <div className="flex flex-col h-full">
+                  <div className="py-4 border-b">
+                    <a href="/" className="text-2xl font-bold">
+                      <span className="text-primary">Moni</span>
+                      <span className="gradient-text">-Fest</span>
+                    </a>
+                  </div>
+                  
+                  <div className="flex-1 py-4 space-y-4">
+                    <div className="space-y-2">
+                      <h3 className="text-sm font-medium text-muted-foreground px-2">Navigation</h3>
+                      <a href="#about" className="block px-2 py-2 text-muted-foreground hover:text-primary transition-colors">
+                        About Us
+                      </a>
+                      <a href="#features" className="block px-2 py-2 text-muted-foreground hover:text-primary transition-colors">
+                        Features
+                      </a>
+                      <a href="/find-creators" className="block px-2 py-2 text-muted-foreground hover:text-primary transition-colors">
+                        Find Creators
+                      </a>
+                      <a href="/find-brands" className="block px-2 py-2 text-muted-foreground hover:text-primary transition-colors">
+                        Brands
+                      </a>
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <h3 className="text-sm font-medium text-muted-foreground px-2">Dashboards</h3>
+                      <a href="/creator-dashboard" className="block px-2 py-2 text-muted-foreground hover:text-primary transition-colors">
+                        Creator Dashboard
+                      </a>
+                      <a href="/brand-dashboard" className="block px-2 py-2 text-muted-foreground hover:text-primary transition-colors">
+                        Brand Dashboard
+                      </a>
+                      <a href="/manager-dashboard" className="block px-2 py-2 text-muted-foreground hover:text-primary transition-colors">
+                        Manager Dashboard
+                      </a>
+                    </div>
+                  </div>
+                  
+                  <div className="py-4 space-y-2 border-t">
+                    <Button variant="ghost" className="w-full justify-start">
+                      Sign In
+                    </Button>
+                    <Button variant="coral" className="w-full" onClick={() => window.location.href = '/get-started'}>
+                      Get Started
+                    </Button>
+                  </div>
+                </div>
+              </SheetContent>
+            </Sheet>
           </div>
         </div>
       </div>
