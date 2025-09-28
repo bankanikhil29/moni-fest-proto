@@ -189,7 +189,11 @@ export default function FindCreators() {
                     </div>
 
                     <div className="flex gap-2">
-                      <Button className="flex-1" variant="coral">
+                      <Button 
+                        className="flex-1" 
+                        variant="coral"
+                        onClick={() => window.location.href = `/creator-profile/${creator.id}`}
+                      >
                         Contact Creator
                       </Button>
                       <Button variant="outline" size="sm">
