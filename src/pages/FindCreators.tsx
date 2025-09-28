@@ -137,71 +137,94 @@ export default function FindCreators() {
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {creators.map((creator) => (
-                <Card key={creator.id} className="card-soft hover:shadow-lg transition-shadow">
-                  <CardContent className="p-6">
-                    <div className="flex items-center gap-4 mb-4">
-                      <img
-                        src={creator.avatar}
-                        alt={creator.name}
-                        className="w-16 h-16 rounded-full object-cover"
-                      />
-                      <div>
-                        <h3 className="font-semibold text-lg">{creator.name}</h3>
-                        <p className="text-muted-foreground">{creator.handle}</p>
-                        <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                          <MapPin className="w-4 h-4" />
-                          {creator.location}
+                <div key={creator.id} className="relative group">
+                  <Card className="card-soft hover:shadow-lg transition-all duration-300 cursor-pointer">
+                    <CardContent className="p-6">
+                      <div className="flex items-center gap-4 mb-4">
+                        <img
+                          src={creator.avatar}
+                          alt={creator.name}
+                          className="w-16 h-16 rounded-full object-cover"
+                        />
+                        <div>
+                          <h3 className="font-semibold text-lg">{creator.name}</h3>
+                          <p className="text-muted-foreground">{creator.handle}</p>
+                          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                            <MapPin className="w-4 h-4" />
+                            {creator.location}
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-4 mb-4">
+                        <div className="flex items-center gap-1">
+                          <Instagram className="w-4 h-4 text-accent" />
+                          <span className="text-sm font-medium">{creator.followers}</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <Star className="w-4 h-4 text-highlight fill-current" />
+                          <span className="text-sm font-medium">{creator.rating}</span>
+                        </div>
+                        <span className="text-sm text-muted-foreground">
+                          {creator.completedProjects} projects
+                        </span>
+                      </div>
+
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {creator.categories.map((category) => (
+                          <Badge key={category} variant="secondary">
+                            {category}
+                          </Badge>
+                        ))}
+                      </div>
+
+                      <div className="bg-secondary rounded-lg p-3 mb-4">
+                        <div className="flex justify-between items-center">
+                          <span className="text-sm text-muted-foreground">Rate per Reel:</span>
+                          <span className="font-semibold text-primary">{creator.ratePerReel}</span>
+                        </div>
+                        <div className="flex justify-between items-center">
+                          <span className="text-sm text-muted-foreground">Rate per Post:</span>
+                          <span className="font-semibold text-primary">{creator.ratePerPost}</span>
+                        </div>
+                      </div>
+
+                      <div className="flex gap-2">
+                        <Button 
+                          className="flex-1" 
+                          variant="coral"
+                          onClick={() => window.location.href = `/creator-profile/${creator.id}`}
+                        >
+                          Contact Creator
+                        </Button>
+                        <Button variant="outline" size="sm">
+                          View Portfolio
+                        </Button>
+                      </div>
+                    </CardContent>
+
+                    {/* Hover Popup */}
+                    <div className="absolute inset-0 bg-black/60 rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none group-hover:pointer-events-auto">
+                      <div className="bg-white rounded-lg p-4 shadow-xl transform scale-95 group-hover:scale-100 transition-transform duration-300">
+                        <div className="text-center">
+                          <h4 className="font-semibold text-lg mb-2 text-gray-900">
+                            {creator.name}
+                          </h4>
+                          <p className="text-sm text-gray-600 mb-4">
+                            Ready to collaborate?
+                          </p>
+                          <Button 
+                            variant="coral"
+                            onClick={() => window.location.href = `/creator-profile/${creator.id}`}
+                            className="w-full"
+                          >
+                            Book Creator
+                          </Button>
                         </div>
                       </div>
                     </div>
-
-                    <div className="flex items-center gap-4 mb-4">
-                      <div className="flex items-center gap-1">
-                        <Instagram className="w-4 h-4 text-accent" />
-                        <span className="text-sm font-medium">{creator.followers}</span>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <Star className="w-4 h-4 text-highlight fill-current" />
-                        <span className="text-sm font-medium">{creator.rating}</span>
-                      </div>
-                      <span className="text-sm text-muted-foreground">
-                        {creator.completedProjects} projects
-                      </span>
-                    </div>
-
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {creator.categories.map((category) => (
-                        <Badge key={category} variant="secondary">
-                          {category}
-                        </Badge>
-                      ))}
-                    </div>
-
-                    <div className="bg-secondary rounded-lg p-3 mb-4">
-                      <div className="flex justify-between items-center">
-                        <span className="text-sm text-muted-foreground">Rate per Reel:</span>
-                        <span className="font-semibold text-primary">{creator.ratePerReel}</span>
-                      </div>
-                      <div className="flex justify-between items-center">
-                        <span className="text-sm text-muted-foreground">Rate per Post:</span>
-                        <span className="font-semibold text-primary">{creator.ratePerPost}</span>
-                      </div>
-                    </div>
-
-                    <div className="flex gap-2">
-                      <Button 
-                        className="flex-1" 
-                        variant="coral"
-                        onClick={() => window.location.href = `/creator-profile/${creator.id}`}
-                      >
-                        Contact Creator
-                      </Button>
-                      <Button variant="outline" size="sm">
-                        View Portfolio
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
+                  </Card>
+                </div>
               ))}
             </div>
           </div>
