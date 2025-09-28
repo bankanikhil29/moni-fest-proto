@@ -127,16 +127,18 @@ const VerificationSuccess = () => {
 
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to={userType === 'brand' ? '/brand-dashboard' : '/creator-dashboard'}>
-              <Button size="lg" className="gap-2">
-                <Trophy className="h-4 w-4" />
-                Go to Dashboard
-              </Button>
-            </Link>
+            {userType === 'brand' && (
+              <Link to="/brand-dashboard">
+                <Button size="lg" className="gap-2">
+                  <Trophy className="h-4 w-4" />
+                  Go to Dashboard
+                </Button>
+              </Link>
+            )}
             <Link to={userType === 'brand' ? '/find-creators' : '/find-brands'}>
-              <Button variant="outline" size="lg" className="gap-2">
+              <Button size="lg" className="gap-2" variant={userType === 'brand' ? 'outline' : 'default'}>
                 <Star className="h-4 w-4" />
-                {userType === 'brand' ? 'Find Verified Creators' : 'Browse Opportunities'}
+                {userType === 'brand' ? 'Find Verified Creators' : 'Start Browsing Brands'}
               </Button>
             </Link>
           </div>

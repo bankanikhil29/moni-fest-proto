@@ -16,7 +16,7 @@ import BrandProfileSetup from "./pages/BrandProfileSetup";
 import DocumentVerification from "./pages/DocumentVerification";
 import VideoVerification from "./pages/VideoVerification";
 import VerificationSuccess from "./pages/VerificationSuccess";
-import CreatorDashboard from "./pages/CreatorDashboard";
+
 import BrandDashboard from "./pages/BrandDashboard";
 import ManagerDashboard from "./pages/ManagerDashboard";
 import CreatorProfile from "./pages/CreatorProfile";
@@ -29,7 +29,7 @@ const queryClient = new QueryClient();
 // Layout component that conditionally shows sidebar
 const AppLayout = () => {
   const location = useLocation();
-  const isDashboardRoute = location.pathname.includes('-dashboard');
+  const isDashboardRoute = location.pathname === '/brand-dashboard' || location.pathname === '/manager-dashboard';
 
   if (isDashboardRoute) {
     // Dashboard routes with sidebar
@@ -39,7 +39,6 @@ const AppLayout = () => {
           <AppSidebar />
           <main className="flex-1">
             <Routes>
-              <Route path="/creator-dashboard" element={<CreatorDashboard />} />
               <Route path="/brand-dashboard" element={<BrandDashboard />} />
               <Route path="/manager-dashboard" element={<ManagerDashboard />} />
             </Routes>
