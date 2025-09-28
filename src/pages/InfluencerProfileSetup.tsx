@@ -774,10 +774,12 @@ const InfluencerProfileSetup = () => {
                 onClick={() => {
                   // Handle form submission
                   console.log("Form submitted:", formData);
+                  // Redirect to verification
+                  window.location.href = '/document-verification?type=influencer';
                 }}
                 className="flex items-center gap-2"
               >
-                Complete Profile
+                Complete Profile & Verify
               </Button>
             )}
           </div>

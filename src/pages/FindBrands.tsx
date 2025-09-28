@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Building, DollarSign, Calendar, Users } from "lucide-react";
+import { Building, DollarSign, Calendar, Users, Shield, CheckCircle } from "lucide-react";
 import Navigation from "@/components/Navigation";
 
 const brands = [
@@ -15,6 +15,7 @@ const brands = [
     lookingFor: ["Fashion Creators", "Lifestyle Influencers"],
     requirements: "10K+ followers, sustainable content focus",
     deliverables: ["3 Instagram Reels", "2 Story Posts", "1 Feed Post"],
+    isVerified: true,
     logo: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=100&h=100&fit=crop",
     description: "Looking for creators who are passionate about sustainable fashion to showcase our new eco-friendly summer collection."
   },
@@ -28,6 +29,7 @@ const brands = [
     lookingFor: ["Tech Reviewers", "Lifestyle Creators"],
     requirements: "20K+ followers, tech-focused content",
     deliverables: ["5 Instagram Reels", "3 YouTube Shorts", "2 Feed Posts"],
+    isVerified: true,
     logo: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=100&h=100&fit=crop",
     description: "Seeking tech-savvy creators to demonstrate our innovative smart home products and their real-world applications."
   },
@@ -41,6 +43,7 @@ const brands = [
     lookingFor: ["Food Bloggers", "Health & Wellness"],
     requirements: "15K+ followers, health-focused content",
     deliverables: ["4 Instagram Reels", "6 Story Posts", "1 IGTV"],
+    isVerified: false,
     logo: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=100&h=100&fit=crop",
     description: "Partner with health-conscious creators to promote our new line of organic, nutrient-packed snacks."
   },
@@ -138,7 +141,15 @@ export default function FindBrands() {
                         className="w-16 h-16 rounded-lg object-cover"
                       />
                       <div>
-                        <h3 className="font-semibold text-lg">{brand.name}</h3>
+                        <div className="flex items-center gap-2 mb-1">
+                          <h3 className="font-semibold text-lg">{brand.name}</h3>
+                          {brand.isVerified && (
+                            <div className="flex items-center gap-1 bg-green-50 dark:bg-green-900/20 px-2 py-1 rounded-full">
+                              <Shield className="w-3 h-3 text-green-600" />
+                              <CheckCircle className="w-3 h-3 text-green-600" />
+                            </div>
+                          )}
+                        </div>
                         <p className="text-muted-foreground text-sm">{brand.industry}</p>
                       </div>
                     </div>

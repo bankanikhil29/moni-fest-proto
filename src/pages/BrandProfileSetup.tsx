@@ -767,10 +767,12 @@ const BrandProfileSetup = () => {
                 onClick={() => {
                   // Handle form submission
                   console.log("Form submitted:", formData);
+                  // Redirect to verification
+                  window.location.href = '/document-verification?type=brand';
                 }}
                 className="flex items-center gap-2"
               >
-                Complete Profile
+                Complete Profile & Verify
               </Button>
             )}
           </div>

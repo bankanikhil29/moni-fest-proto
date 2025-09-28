@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Star, Instagram, Youtube, MapPin } from "lucide-react";
+import { Star, Instagram, Youtube, MapPin, Shield, CheckCircle } from "lucide-react";
 import Navigation from "@/components/Navigation";
 
 const creators = [
@@ -16,6 +16,7 @@ const creators = [
     ratePerPost: "₹8,000",
     rating: 4.9,
     completedProjects: 127,
+    isVerified: true,
     avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face",
     portfolio: ["https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=200&h=200&fit=crop"]
   },
@@ -30,6 +31,7 @@ const creators = [
     ratePerPost: "₹9,500",
     rating: 4.8,
     completedProjects: 89,
+    isVerified: true,
     avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face",
     portfolio: ["https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=200&h=200&fit=crop"]
   },
@@ -44,6 +46,7 @@ const creators = [
     ratePerPost: "₹6,500",
     rating: 4.9,
     completedProjects: 156,
+    isVerified: false,
     avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face",
     portfolio: ["https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=200&h=200&fit=crop"]
   },
@@ -147,7 +150,15 @@ export default function FindCreators() {
                           className="w-16 h-16 rounded-full object-cover"
                         />
                         <div>
-                          <h3 className="font-semibold text-lg">{creator.name}</h3>
+                          <div className="flex items-center gap-2">
+                            <h3 className="font-semibold text-lg">{creator.name}</h3>
+                            {creator.isVerified && (
+                              <div className="flex items-center gap-1 bg-green-50 dark:bg-green-900/20 px-2 py-1 rounded-full">
+                                <Shield className="w-3 h-3 text-green-600" />
+                                <CheckCircle className="w-3 h-3 text-green-600" />
+                              </div>
+                            )}
+                          </div>
                           <p className="text-muted-foreground">{creator.handle}</p>
                           <div className="flex items-center gap-2 text-sm text-muted-foreground">
                             <MapPin className="w-4 h-4" />

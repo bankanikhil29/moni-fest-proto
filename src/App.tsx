@@ -13,6 +13,9 @@ import GetStarted from "./pages/GetStarted";
 import UserTypeSelection from "./pages/UserTypeSelection";
 import InfluencerProfileSetup from "./pages/InfluencerProfileSetup";
 import BrandProfileSetup from "./pages/BrandProfileSetup";
+import DocumentVerification from "./pages/DocumentVerification";
+import VideoVerification from "./pages/VideoVerification";
+import VerificationSuccess from "./pages/VerificationSuccess";
 import CreatorDashboard from "./pages/CreatorDashboard";
 import BrandDashboard from "./pages/BrandDashboard";
 import ManagerDashboard from "./pages/ManagerDashboard";
@@ -57,6 +60,9 @@ const AppLayout = () => {
       <Route path="/user-type-selection" element={<UserTypeSelection />} />
       <Route path="/influencer-setup" element={<InfluencerProfileSetup />} />
       <Route path="/brand-setup" element={<BrandProfileSetup />} />
+      <Route path="/document-verification" element={<DocumentVerification />} />
+      <Route path="/video-verification" element={<VideoVerification />} />
+      <Route path="/verification-success" element={<VerificationSuccess />} />
       <Route path="/creator-profile/:id" element={<CreatorProfile />} />
       <Route path="/creator-booking/:id" element={<CreatorBooking />} />
       <Route path="/payment/:id" element={<PaymentPage />} />
