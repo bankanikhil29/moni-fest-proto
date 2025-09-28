@@ -8,8 +8,8 @@ export default function Hero() {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="text-center lg:text-left">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-              <span className="gradient-text">Micro Creators</span>{" "}
-              <span className="text-primary">Get Paid on Time.</span>
+              Where <span className="gradient-text">Micro Creators</span> Meet Brands —{" "}
+              <span className="text-primary">and Get Paid on Time.</span>
             </h1>
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl text-center">
               A marketplace built for part-time and early-stage creators. Brands discover, 
