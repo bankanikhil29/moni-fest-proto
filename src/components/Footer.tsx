@@ -106,7 +106,7 @@ export default function Footer() {
 
         <div className="border-t border-white/10 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center text-sm opacity-75">
-            <div>© 2024 Moni-Fest. All rights reserved.</div>
+            <div>© 2025 Moni-Fest. All rights reserved.</div>
             <div className="mt-4 md:mt-0">
               Moni-Fest — powering the creator economy, one micro-collaboration at a time.
             </div>
