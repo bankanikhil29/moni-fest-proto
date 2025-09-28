@@ -6,7 +6,7 @@ export default function Hero() {
     <section className="relative bg-gradient-to-br from-background via-background to-secondary py-20 lg:py-32 overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div className="text-center lg:text-left">
+          <div className="text-center">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
               Where <span className="gradient-text">Micro Creators</span> Meet Brands{" "}
               <span className="text-primary">and Get Paid on Time.</span>
@@ -15,7 +15,7 @@ export default function Hero() {
               A marketplace built for part-time and early-stage creators. Brands discover, 
               creators deliver — payments guaranteed through secure escrow.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button variant="coral" size="lg" className="text-lg px-8">
                 Find Creators
               </Button>
@@ -23,7 +23,7 @@ export default function Hero() {
                 Join as a Creator
               </Button>
             </div>
-            <div className="mt-8 flex items-center gap-6 justify-center lg:justify-start text-sm text-muted-foreground">
+            <div className="mt-8 flex items-center gap-6 justify-center text-sm text-muted-foreground">
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-accent rounded-full"></div>
                 <span>Escrow Protected</span>
