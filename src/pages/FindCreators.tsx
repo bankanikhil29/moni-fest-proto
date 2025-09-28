@@ -3,12 +3,18 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Star, Instagram, Youtube, MapPin, Shield, CheckCircle } from "lucide-react";
 import Navigation from "@/components/Navigation";
+import priyaImage from "@/assets/creator-priya.jpg";
+import arjunImage from "@/assets/creator-arjun.jpg";
+import kavyaImage from "@/assets/creator-kavya.jpg";
+import rohitImage from "@/assets/creator-rohit.jpg";
+import meeraImage from "@/assets/creator-meera.jpg";
+import devImage from "@/assets/creator-dev.jpg";
 
 const creators = [
   {
     id: 1,
-    name: "Akarsh Sharma",
-    handle: "@akarshcreates",
+    name: "Priya Sharma",
+    handle: "@priyafashion",
     followers: "45K",
     location: "Mumbai, Maharashtra",
     categories: ["Fashion", "Lifestyle"],
@@ -17,30 +23,90 @@ const creators = [
     rating: 4.9,
     completedProjects: 127,
     isVerified: true,
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face",
+    avatar: priyaImage,
     portfolio: ["https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=200&h=200&fit=crop"]
   },
   {
     id: 2,
-    name: "Nikhil Patel",
-    handle: "@nikhiltech",
+    name: "Arjun Patel",
+    handle: "@arjuntech",
     followers: "32K",
-    location: "Bangalore, Karnataka",
+    location: "Bangalore, Karnataka", 
     categories: ["Tech", "Gaming"],
     ratePerReel: "₹15,000",
     ratePerPost: "₹9,500",
     rating: 4.8,
     completedProjects: 89,
     isVerified: true,
-    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face",
+    avatar: arjunImage,
     portfolio: ["https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=200&h=200&fit=crop"]
   },
   {
     id: 3,
-    name: "Anvita Singh",
-    handle: "@anvitafoodie",
-    followers: "28K",
+    name: "Kavya Singh",
+    handle: "@kavyabeauty",
+    followers: "38K",
     location: "Delhi, NCR",
+    categories: ["Beauty", "Skincare"],
+    ratePerReel: "₹12,800",
+    ratePerPost: "₹7,600",
+    rating: 4.9,
+    completedProjects: 178,
+    isVerified: true,
+    avatar: kavyaImage,
+    portfolio: ["https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=200&h=200&fit=crop"]
+  },
+  {
+    id: 4,
+    name: "Rohit Kumar",
+    handle: "@rohitfitness",
+    followers: "52K",
+    location: "Pune, Maharashtra",
+    categories: ["Fitness", "Health"],
+    ratePerReel: "₹14,500",
+    ratePerPost: "₹8,800",
+    rating: 4.8,
+    completedProjects: 203,
+    isVerified: true,
+    avatar: rohitImage,
+    portfolio: ["https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=200&fit=crop"]
+  },
+  {
+    id: 5,
+    name: "Meera Iyer",
+    handle: "@meeracooks",
+    followers: "35K",
+    location: "Chennai, Tamil Nadu",
+    categories: ["Food", "Cooking"],
+    ratePerReel: "₹11,200",
+    ratePerPost: "₹6,800",
+    rating: 4.8,
+    completedProjects: 189,
+    isVerified: true,
+    avatar: meeraImage,
+    portfolio: ["https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=200&h=200&fit=crop"]
+  },
+  {
+    id: 6,
+    name: "Dev Malhotra",
+    handle: "@devtravels",
+    followers: "41K",
+    location: "Jaipur, Rajasthan",
+    categories: ["Travel", "Photography"],
+    ratePerReel: "₹13,600",
+    ratePerPost: "₹8,400",
+    rating: 4.7,
+    completedProjects: 145,
+    isVerified: true,
+    avatar: devImage,
+    portfolio: ["https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=200&h=200&fit=crop"]
+  },
+  {
+    id: 7,
+    name: "Nishka Gupta",
+    handle: "@nishkafoodie",
+    followers: "28K",
+    location: "Hyderabad, Telangana",
     categories: ["Food", "Travel"],
     ratePerReel: "₹10,500",
     ratePerPost: "₹6,500",
@@ -51,65 +117,9 @@ const creators = [
     portfolio: ["https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=200&h=200&fit=crop"]
   },
   {
-    id: 4,
-    name: "Nishith Kumar",
-    handle: "@nishithfitness",
-    followers: "52K",
-    location: "Pune, Maharashtra",
-    categories: ["Fitness", "Health"],
-    ratePerReel: "₹14,500",
-    ratePerPost: "₹8,800",
-    rating: 4.8,
-    completedProjects: 203,
-    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face",
-    portfolio: ["https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=200&fit=crop"]
-  },
-  {
-    id: 5,
-    name: "Shubhika Mehta",
-    handle: "@shubhikabeauty",
-    followers: "38K",
-    location: "Hyderabad, Telangana",
-    categories: ["Beauty", "Skincare"],
-    ratePerReel: "₹12,800",
-    ratePerPost: "₹7,600",
-    rating: 4.9,
-    completedProjects: 178,
-    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face",
-    portfolio: ["https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=200&h=200&fit=crop"]
-  },
-  {
-    id: 6,
-    name: "Rohan Gupta",
-    handle: "@rohantravels",
-    followers: "41K",
-    location: "Jaipur, Rajasthan",
-    categories: ["Travel", "Photography"],
-    ratePerReel: "₹13,600",
-    ratePerPost: "₹8,400",
-    rating: 4.7,
-    completedProjects: 145,
-    avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop&crop=face",
-    portfolio: ["https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=200&h=200&fit=crop"]
-  },
-  {
-    id: 7,
-    name: "Priya Iyer",
-    handle: "@priyacooks",
-    followers: "35K",
-    location: "Chennai, Tamil Nadu",
-    categories: ["Food", "Cooking"],
-    ratePerReel: "₹11,200",
-    ratePerPost: "₹6,800",
-    rating: 4.8,
-    completedProjects: 189,
-    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop&crop=face",
-    portfolio: ["https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=200&h=200&fit=crop"]
-  },
-  {
     id: 8,
-    name: "Arjun Malhotra",
-    handle: "@arjunmusic",
+    name: "Aarav Malhotra",
+    handle: "@aaravmusic",
     followers: "29K",
     location: "Kolkata, West Bengal",
     categories: ["Music", "Entertainment"],
@@ -117,6 +127,7 @@ const creators = [
     ratePerPost: "₹7,200",
     rating: 4.6,
     completedProjects: 112,
+    isVerified: false,
     avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face",
     portfolio: ["https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=200&h=200&fit=crop"]
   }

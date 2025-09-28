@@ -6,32 +6,13 @@ import { Users, Eye, DollarSign, TrendingUp } from "lucide-react";
 import Navigation from "@/components/Navigation";
 
 const stats = [
-  { label: "Active Campaigns", value: "8", icon: TrendingUp, change: "+3" },
-  { label: "Total Applications", value: "124", icon: Users, change: "+18" },
-  { label: "Campaign Spend", value: "₹ 12,50,000.00", icon: DollarSign, change: "+₹ 2,30,000.00" },
-  { label: "Profile Views", value: "2,341", icon: Eye, change: "+15%" }
+  { label: "Active Campaigns", value: "0", icon: TrendingUp, change: "+0" },
+  { label: "Total Applications", value: "0", icon: Users, change: "+0" },
+  { label: "Campaign Spend", value: "₹0", icon: DollarSign, change: "+₹0" },
+  { label: "Profile Views", value: "0", icon: Eye, change: "+0%" }
 ];
 
-const campaigns = [
-  {
-    id: 1,
-    title: "Summer Eco Collection",
-    status: "Active",
-    budget: "₹ 2,00,000.00 - ₹ 5,00,000.00",
-    applications: 23,
-    selected: 3,
-    deadline: "2024-02-15"
-  },
-  {
-    id: 2,
-    title: "Sustainable Fashion Week",
-    status: "Draft",
-    budget: "₹ 5,00,000.00 - ₹ 10,00,000.00",
-    applications: 0,
-    selected: 0,
-    deadline: "2024-03-01"
-  }
-];
+const campaigns = [];
 
 export default function BrandDashboard() {
   return (
@@ -80,35 +61,47 @@ export default function BrandDashboard() {
               </div>
               
               <div className="space-y-4">
-                {campaigns.map((campaign) => (
-                  <Card key={campaign.id}>
-                    <CardContent className="p-6">
-                      <div className="flex items-center justify-between">
-                        <div className="flex-1">
-                          <h3 className="font-semibold text-lg">{campaign.title}</h3>
-                          <p className="text-muted-foreground">Budget: {campaign.budget}</p>
-                          <p className="text-sm text-muted-foreground mt-1">Deadline: {campaign.deadline}</p>
-                        </div>
-                        <div className="text-right">
-                          <Badge variant={campaign.status === "Active" ? "default" : "secondary"}>
-                            {campaign.status}
-                          </Badge>
-                          <div className="mt-2 space-y-1">
-                            <p className="text-sm">
-                              <span className="font-medium">{campaign.applications}</span> applications
-                            </p>
-                            <p className="text-sm">
-                              <span className="font-medium">{campaign.selected}</span> selected
-                            </p>
-                          </div>
-                          <Button size="sm" className="mt-2">
-                            View Campaign
-                          </Button>
-                        </div>
-                      </div>
+                {campaigns.length === 0 ? (
+                  <Card>
+                    <CardContent className="p-8 text-center">
+                      <h3 className="text-lg font-semibold mb-2">No campaigns yet</h3>
+                      <p className="text-muted-foreground mb-4">
+                        Create your first campaign to start finding the perfect creators for your brand.
+                      </p>
+                      <Button variant="coral">Create Your First Campaign</Button>
                     </CardContent>
                   </Card>
-                ))}
+                ) : (
+                  campaigns.map((campaign) => (
+                    <Card key={campaign.id}>
+                      <CardContent className="p-6">
+                        <div className="flex items-center justify-between">
+                          <div className="flex-1">
+                            <h3 className="font-semibold text-lg">{campaign.title}</h3>
+                            <p className="text-muted-foreground">Budget: {campaign.budget}</p>
+                            <p className="text-sm text-muted-foreground mt-1">Deadline: {campaign.deadline}</p>
+                          </div>
+                          <div className="text-right">
+                            <Badge variant={campaign.status === "Active" ? "default" : "secondary"}>
+                              {campaign.status}
+                            </Badge>
+                            <div className="mt-2 space-y-1">
+                              <p className="text-sm">
+                                <span className="font-medium">{campaign.applications}</span> applications
+                              </p>
+                              <p className="text-sm">
+                                <span className="font-medium">{campaign.selected}</span> selected
+                              </p>
+                            </div>
+                            <Button size="sm" className="mt-2">
+                              View Campaign
+                            </Button>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))
+                )}
               </div>
             </TabsContent>
 
