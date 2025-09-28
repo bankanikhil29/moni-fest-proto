@@ -1,6 +1,8 @@
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { SidebarProvider } from "@/components/ui/sidebar";
+import { AppSidebar } from "@/components/AppSidebar";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
@@ -24,21 +26,28 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/find-creators" element={<FindCreators />} />
-          <Route path="/find-brands" element={<FindBrands />} />
-          <Route path="/join-as-creator" element={<JoinAsCreator />} />
-          <Route path="/get-started" element={<GetStarted />} />
-          <Route path="/creator-dashboard" element={<CreatorDashboard />} />
-          <Route path="/brand-dashboard" element={<BrandDashboard />} />
-          <Route path="/manager-dashboard" element={<ManagerDashboard />} />
-          <Route path="/creator-profile/:id" element={<CreatorProfile />} />
-          <Route path="/creator-booking/:id" element={<CreatorBooking />} />
-          <Route path="/payment/:id" element={<PaymentPage />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <SidebarProvider>
+          <div className="min-h-screen flex w-full">
+            <AppSidebar />
+            <main className="flex-1">
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/find-creators" element={<FindCreators />} />
+                <Route path="/find-brands" element={<FindBrands />} />
+                <Route path="/join-as-creator" element={<JoinAsCreator />} />
+                <Route path="/get-started" element={<GetStarted />} />
+                <Route path="/creator-dashboard" element={<CreatorDashboard />} />
+                <Route path="/brand-dashboard" element={<BrandDashboard />} />
+                <Route path="/manager-dashboard" element={<ManagerDashboard />} />
+                <Route path="/creator-profile/:id" element={<CreatorProfile />} />
+                <Route path="/creator-booking/:id" element={<CreatorBooking />} />
+                <Route path="/payment/:id" element={<PaymentPage />} />
+                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </main>
+          </div>
+        </SidebarProvider>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

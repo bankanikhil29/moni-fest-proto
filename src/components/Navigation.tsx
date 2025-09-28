@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Menu } from "lucide-react";
+import { SidebarTrigger } from "@/components/ui/sidebar";
 
 export default function Navigation() {
   return (
@@ -46,9 +46,9 @@ export default function Navigation() {
             <Button variant="coral" size="sm" onClick={() => window.location.href = '/get-started'}>Get Started</Button>
           </div>
 
-          <button className="md:hidden">
-            <Menu className="h-6 w-6" />
-          </button>
+          <div className="md:hidden">
+            <SidebarTrigger />
+          </div>
         </div>
       </div>
     </nav>
