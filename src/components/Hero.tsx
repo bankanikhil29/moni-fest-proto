@@ -9,7 +9,8 @@ export default function Hero() {
           <div className="text-center lg:text-left">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
               Turn Your <span className="gradient-text">Creativity</span> Into <span className="gradient-text">Cash</span>{" "}
-              <span className="text-primary">— No More Payment Drama!</span>
+              <br />
+              <span className="text-primary">No More Payment Drama!</span>
             </h1>
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl text-center lg:text-left">
               A marketplace built for part-time and early-stage creators. Brands discover, 
