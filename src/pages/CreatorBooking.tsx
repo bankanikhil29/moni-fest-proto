@@ -265,10 +265,10 @@ export default function CreatorBooking() {
                       <div className="flex items-start gap-3">
                         <Shield className="w-5 h-5 text-green-600 mt-0.5" />
                         <div>
-                          <h3 className="font-semibold text-green-800 mb-1">Secure Escrow Payment</h3>
+                          <h3 className="font-semibold text-green-800 mb-1">Safe Payment with Escrow</h3>
                           <p className="text-sm text-green-700">
-                            Your payment is held securely until project completion. 
-                            Funds are released to the creator only after you approve the work.
+                            <strong>Simple & Safe:</strong> We hold your money safely until the work is done. 
+                            Only when you're happy with the content, we release payment to the creator.
                           </p>
                         </div>
                       </div>
@@ -325,7 +325,7 @@ export default function CreatorBooking() {
                     onClick={() => window.location.href = `/payment/${id}?amount=${totalAmount}&services=${selectedServices.join(',')}`}
                   >
                     <DollarSign className="w-4 h-4 mr-2" />
-                    Proceed to Payment (${totalAmount})
+                    Make Payment (${totalAmount})
                   </Button>
                 </div>
               </div>

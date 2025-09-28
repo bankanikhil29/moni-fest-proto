@@ -214,21 +214,26 @@ export default function PaymentPage() {
                       <div className="flex items-start gap-3">
                         <Shield className="w-5 h-5 text-green-600 mt-0.5" />
                         <div>
-                          <h3 className="font-semibold text-green-800 mb-2">Your payment is protected</h3>
-                          <ul className="text-sm text-green-700 space-y-1">
-                            <li className="flex items-center gap-2">
-                              <Lock className="w-3 h-3" />
-                              256-bit SSL encryption
-                            </li>
-                            <li className="flex items-center gap-2">
-                              <Shield className="w-3 h-3" />
-                              Secure escrow service
-                            </li>
-                            <li className="flex items-center gap-2">
-                              <CheckCircle className="w-3 h-3" />
-                              Full refund protection
-                            </li>
-                          </ul>
+                          <h3 className="font-semibold text-green-800 mb-2">How Escrow Works (Simple!)</h3>
+                          <div className="text-sm text-green-700 space-y-2">
+                            <div className="flex items-center gap-2">
+                              <div className="w-5 h-5 bg-green-600 text-white rounded-full flex items-center justify-center text-xs">1</div>
+                              <span>You pay us (not the creator directly)</span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <div className="w-5 h-5 bg-green-600 text-white rounded-full flex items-center justify-center text-xs">2</div>
+                              <span>Creator makes your content</span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <div className="w-5 h-5 bg-green-600 text-white rounded-full flex items-center justify-center text-xs">3</div>
+                              <span>You approve the work</span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <div className="w-5 h-5 bg-green-600 text-white rounded-full flex items-center justify-center text-xs">4</div>
+                              <span>We release payment to creator</span>
+                            </div>
+                            <p className="mt-3 font-medium">💡 Your money is 100% safe until you're happy!</p>
+                          </div>
                         </div>
                       </div>
                     </CardContent>
@@ -293,11 +298,11 @@ export default function PaymentPage() {
                     onClick={handlePayment}
                   >
                     <Lock className="w-4 h-4 mr-2" />
-                    Complete Secure Payment
+                    Make Payment Now
                   </Button>
 
                   <p className="text-xs text-muted-foreground text-center">
-                    By completing this payment, you agree to our Terms of Service and Privacy Policy.
+                    💳 Secure payment • 🛡️ Protected by escrow • ✅ Money-back guarantee
                   </p>
                 </div>
               </div>

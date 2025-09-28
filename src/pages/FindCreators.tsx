@@ -215,7 +215,7 @@ export default function FindCreators() {
                           </p>
                           <Button 
                             variant="coral"
-                            onClick={() => window.location.href = `/creator-profile/${creator.id}`}
+                            onClick={() => window.location.href = `/creator-booking/${creator.id}`}
                             className="w-full"
                           >
                             Book Creator
