@@ -16,8 +16,8 @@ export default function Hero() {
               </div>
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-white">
-              MANIFEST YOUR <span className="text-highlight">INFLUENCERS</span>/
-              <span className="text-highlight">BRAND DEALS</span> INTO REALITY
+              Manifest Your <span className="text-white font-extrabold">Influencer</span> &
+              <span className="text-white font-extrabold">Brand Deals</span> Into Reality
             </h1>
             <p className="text-xl text-white/80 mb-8 max-w-2xl text-center lg:text-left">
               A marketplace built for part-time and early-stage creators. Brands discover, 
