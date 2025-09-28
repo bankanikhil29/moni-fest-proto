@@ -6,9 +6,9 @@ import { DollarSign, TrendingUp, Clock, Star, Eye } from "lucide-react";
 import Navigation from "@/components/Navigation";
 
 const stats = [
-  { label: "Total Earnings", value: "$3,450", icon: DollarSign, change: "+12%" },
+  { label: "Total Earnings", value: "₹ 3,45,000.00", icon: DollarSign, change: "+12%" },
   { label: "Active Campaigns", value: "5", icon: TrendingUp, change: "+2" },
-  { label: "Pending Payments", value: "$850", icon: Clock, change: "" },
+  { label: "Pending Payments", value: "₹ 85,000.00", icon: Clock, change: "" },
   { label: "Average Rating", value: "4.9", icon: Star, change: "+0.1" }
 ];
 
@@ -18,7 +18,7 @@ const campaigns = [
     brand: "EcoStyle",
     title: "Summer Collection Showcase",
     status: "Active",
-    payment: "$300",
+    payment: "₹ 30,000.00",
     deadline: "2024-02-15",
     deliverables: ["2 Reels", "3 Stories"]
   },
@@ -27,7 +27,7 @@ const campaigns = [
     brand: "TechFlow",
     title: "Smart Home Review",
     status: "In Review",
-    payment: "$500",
+    payment: "₹ 50,000.00",
     deadline: "2024-02-20",
     deliverables: ["1 Reel", "1 YouTube Short"]
   }

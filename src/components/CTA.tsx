@@ -29,7 +29,7 @@ export default function CTA() {
               <div className="text-sm opacity-75">Active Creators</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold">$150</div>
+              <div className="text-2xl font-bold">₹ 15,000.00</div>
               <div className="text-sm opacity-75">Avg. Gig Value</div>
             </div>
             <div className="text-center">

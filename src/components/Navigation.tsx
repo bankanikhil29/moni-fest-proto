@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 import logo from "@/assets/logo.png";
+import CurrencyToggle from "./CurrencyToggle";
 
 export default function Navigation() {
   return (
@@ -31,6 +32,7 @@ export default function Navigation() {
           </div>
 
           <div className="hidden md:flex items-center space-x-4">
+            <CurrencyToggle />
             <div className="flex items-center space-x-2">
               <a href="/creator-dashboard" className="text-muted-foreground hover:text-primary transition-colors text-sm">
                 Creator

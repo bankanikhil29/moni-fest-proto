@@ -8,7 +8,7 @@ import Navigation from "@/components/Navigation";
 const stats = [
   { label: "Active Campaigns", value: "8", icon: TrendingUp, change: "+3" },
   { label: "Total Applications", value: "124", icon: Users, change: "+18" },
-  { label: "Campaign Spend", value: "$12,500", icon: DollarSign, change: "+$2,300" },
+  { label: "Campaign Spend", value: "₹ 12,50,000.00", icon: DollarSign, change: "+₹ 2,30,000.00" },
   { label: "Profile Views", value: "2,341", icon: Eye, change: "+15%" }
 ];
 
@@ -17,7 +17,7 @@ const campaigns = [
     id: 1,
     title: "Summer Eco Collection",
     status: "Active",
-    budget: "$2,000 - $5,000",
+    budget: "₹ 2,00,000.00 - ₹ 5,00,000.00",
     applications: 23,
     selected: 3,
     deadline: "2024-02-15"
@@ -26,7 +26,7 @@ const campaigns = [
     id: 2,
     title: "Sustainable Fashion Week",
     status: "Draft",
-    budget: "$5,000 - $10,000",
+    budget: "₹ 5,00,000.00 - ₹ 10,00,000.00",
     applications: 0,
     selected: 0,
     deadline: "2024-03-01"

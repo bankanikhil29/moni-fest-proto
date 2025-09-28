@@ -58,7 +58,7 @@ export default function Hero() {
             </div>
             <div className="absolute bottom-4 right-4 bg-white rounded-lg p-3 card-soft">
               <div className="text-sm font-medium text-primary">Payment in 3 days</div>
-              <div className="text-xs text-muted-foreground">$150 secured</div>
+              <div className="text-xs text-muted-foreground">₹ 15,000.00 secured</div>
             </div>
           </div>
         </div>

@@ -8,7 +8,7 @@ import Navigation from "@/components/Navigation";
 const stats = [
   { label: "Managed Brands", value: "12", icon: Building, change: "+2" },
   { label: "Active Creators", value: "156", icon: Users, change: "+24" },
-  { label: "Total Spend", value: "$45,200", icon: DollarSign, change: "+$8,500" },
+  { label: "Total Spend", value: "₹ 45,20,000.00", icon: DollarSign, change: "+₹ 8,50,000.00" },
   { label: "Campaign ROI", value: "3.2x", icon: BarChart3, change: "+0.4x" }
 ];
 
@@ -17,21 +17,21 @@ const brands = [
     id: 1,
     name: "EcoStyle",
     campaigns: 3,
-    spend: "$12,500",
+    spend: "₹ 12,50,000.00",
     performance: "Excellent"
   },
   {
     id: 2,
     name: "TechFlow",
     campaigns: 5,
-    spend: "$18,200",
+    spend: "₹ 18,20,000.00",
     performance: "Good"
   },
   {
     id: 3,
     name: "FreshBites",
     campaigns: 2,
-    spend: "$8,900",
+    spend: "₹ 8,90,000.00",
     performance: "Excellent"
   }
 ];

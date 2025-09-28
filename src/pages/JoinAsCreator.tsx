@@ -185,7 +185,7 @@ export default function JoinAsCreator() {
                       <Label htmlFor="ratePerReel">Rate per Instagram Reel</Label>
                       <Input 
                         id="ratePerReel" 
-                        placeholder="$150"
+                        placeholder="₹ 15,000.00"
                         value={formData.ratePerReel}
                         onChange={(e) => setFormData({...formData, ratePerReel: e.target.value})}
                       />
@@ -194,7 +194,7 @@ export default function JoinAsCreator() {
                       <Label htmlFor="ratePerPost">Rate per Instagram Post</Label>
                       <Input 
                         id="ratePerPost" 
-                        placeholder="$100"
+                        placeholder="₹ 10,000.00"
                         value={formData.ratePerPost}
                         onChange={(e) => setFormData({...formData, ratePerPost: e.target.value})}
                       />
