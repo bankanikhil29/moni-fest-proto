@@ -4,6 +4,13 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
+import FindCreators from "./pages/FindCreators";
+import FindBrands from "./pages/FindBrands";
+import JoinAsCreator from "./pages/JoinAsCreator";
+import GetStarted from "./pages/GetStarted";
+import CreatorDashboard from "./pages/CreatorDashboard";
+import BrandDashboard from "./pages/BrandDashboard";
+import ManagerDashboard from "./pages/ManagerDashboard";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -16,6 +23,13 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/find-creators" element={<FindCreators />} />
+          <Route path="/find-brands" element={<FindBrands />} />
+          <Route path="/join-as-creator" element={<JoinAsCreator />} />
+          <Route path="/get-started" element={<GetStarted />} />
+          <Route path="/creator-dashboard" element={<CreatorDashboard />} />
+          <Route path="/brand-dashboard" element={<BrandDashboard />} />
+          <Route path="/manager-dashboard" element={<ManagerDashboard />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

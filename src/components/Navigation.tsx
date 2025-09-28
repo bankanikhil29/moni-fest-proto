@@ -14,23 +14,36 @@ export default function Navigation() {
           </div>
           
           <div className="hidden md:flex items-center space-x-8">
-            <a href="#how-it-works" className="text-muted-foreground hover:text-primary transition-colors">
-              How It Works
+            <a href="#about" className="text-muted-foreground hover:text-primary transition-colors">
+              About Us
             </a>
             <a href="#features" className="text-muted-foreground hover:text-primary transition-colors">
               Features
             </a>
-            <a href="#pricing" className="text-muted-foreground hover:text-primary transition-colors">
-              Pricing
+            <a href="/find-creators" className="text-muted-foreground hover:text-primary transition-colors">
+              Find Creators
             </a>
-            <a href="#about" className="text-muted-foreground hover:text-primary transition-colors">
-              About
+            <a href="/find-brands" className="text-muted-foreground hover:text-primary transition-colors">
+              Brands
             </a>
           </div>
 
           <div className="hidden md:flex items-center space-x-4">
+            <div className="flex items-center space-x-2">
+              <a href="/creator-dashboard" className="text-muted-foreground hover:text-primary transition-colors text-sm">
+                Creator
+              </a>
+              <span className="text-muted-foreground">|</span>
+              <a href="/brand-dashboard" className="text-muted-foreground hover:text-primary transition-colors text-sm">
+                Brand
+              </a>
+              <span className="text-muted-foreground">|</span>
+              <a href="/manager-dashboard" className="text-muted-foreground hover:text-primary transition-colors text-sm">
+                Manager
+              </a>
+            </div>
             <Button variant="ghost">Sign In</Button>
-            <Button variant="coral" size="sm">Get Started</Button>
+            <Button variant="coral" size="sm" onClick={() => window.location.href = '/get-started'}>Get Started</Button>
           </div>
 
           <button className="md:hidden">

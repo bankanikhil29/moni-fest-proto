@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import heroImage from "@/assets/hero-creators.jpg";
+import heroImage from "@/assets/creators-workspace.jpg";
 
 export default function Hero() {
   return (
@@ -16,10 +16,13 @@ export default function Hero() {
               creators deliver — payments guaranteed through secure escrow.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button variant="coral" size="lg" className="text-lg px-8">
+              <Button variant="coral" size="lg" className="text-lg px-8" onClick={() => window.location.href = '/find-creators'}>
                 Find Creators
               </Button>
-              <Button variant="outline" size="lg" className="text-lg px-8">
+              <Button variant="coral" size="lg" className="text-lg px-8" onClick={() => window.location.href = '/find-brands'}>
+                Brands
+              </Button>
+              <Button variant="outline" size="lg" className="text-lg px-8" onClick={() => window.location.href = '/join-as-creator'}>
                 Join as a Creator
               </Button>
             </div>
@@ -42,7 +45,7 @@ export default function Hero() {
             <div className="card-floating rounded-2xl overflow-hidden">
               <img 
                 src={heroImage} 
-                alt="Diverse micro-creators collaborating with brands"
+                alt="Modern creators workspace with diverse creators"
                 className="w-full h-auto"
               />
             </div>

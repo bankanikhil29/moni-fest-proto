@@ -15,11 +15,11 @@ export default function CTA() {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button variant="outline-white" size="lg" className="text-lg px-8">
-              Post Your First Brief
+            <Button variant="outline-white" size="lg" className="text-lg px-8" onClick={() => window.location.href = '/get-started'}>
+              Get Started Today
             </Button>
-            <Button variant="outline-white" size="lg" className="text-lg px-8">
-              Apply to Collaborations
+            <Button variant="outline-white" size="lg" className="text-lg px-8" onClick={() => window.location.href = '/join-as-creator'}>
+              Join as Creator
             </Button>
           </div>
 
