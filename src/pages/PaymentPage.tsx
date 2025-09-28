@@ -11,9 +11,9 @@ import { useState } from "react";
 
 const creatorData = {
   1: {
-    name: "Sarah Chen",
-    handle: "@sarahcreates",
-    avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face"
+    name: "Akarsh Sharma",
+    handle: "@akarshcreates",
+    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face"
   }
 };
 
@@ -270,7 +270,7 @@ export default function PaymentPage() {
                       </div>
 
                       <div className="border-t pt-4 text-2xl font-bold text-primary text-center">
-                        Total: ${amount}
+                        Total: ₹{amount}
                       </div>
                     </CardContent>
                   </Card>

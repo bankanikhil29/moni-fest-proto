@@ -13,14 +13,14 @@ import { useState } from "react";
 
 const creatorData = {
   1: {
-    name: "Sarah Chen",
-    handle: "@sarahcreates",
-    avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face",
+    name: "Akarsh Sharma",
+    handle: "@akarshcreates",
+    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face",
     services: [
-      { name: "Instagram Reel", price: 150, description: "15-30 second engaging reel with trending audio" },
-      { name: "Instagram Post", price: 100, description: "High-quality photo post with caption" },
-      { name: "Story Series", price: 75, description: "3-5 Instagram stories showcasing your product" },
-      { name: "YouTube Integration", price: 200, description: "Product placement in YouTube video" }
+      { name: "Instagram Reel", price: 12000, description: "15-30 second engaging reel with trending audio" },
+      { name: "Instagram Post", price: 8000, description: "High-quality photo post with caption" },
+      { name: "Story Series", price: 6000, description: "3-5 Instagram stories showcasing your product" },
+      { name: "YouTube Integration", price: 16000, description: "Product placement in YouTube video" }
     ]
   }
 };
@@ -138,7 +138,7 @@ export default function CreatorBooking() {
                               <div className="flex-1">
                                 <div className="flex justify-between items-start mb-2">
                                   <h3 className="font-semibold">{service.name}</h3>
-                                  <span className="text-lg font-bold text-primary">${service.price}</span>
+                                  <span className="text-lg font-bold text-primary">₹{service.price}</span>
                                 </div>
                                 <p className="text-sm text-muted-foreground">{service.description}</p>
                               </div>
@@ -235,24 +235,24 @@ export default function CreatorBooking() {
                                 </div>
                               ))}
                             
-                            <div className="border-t pt-4 space-y-2">
-                              <div className="flex justify-between text-sm">
-                                <span className="text-muted-foreground">Subtotal</span>
-                                <span>${getTotalPrice()}</span>
+                              <div className="border-t pt-4 space-y-2">
+                                <div className="flex justify-between text-sm">
+                                  <span className="text-muted-foreground">Subtotal</span>
+                                  <span>₹{getTotalPrice()}</span>
+                                </div>
+                                <div className="flex justify-between text-sm">
+                                  <span className="text-muted-foreground">Platform Fee (5%)</span>
+                                  <span>₹{platformFee}</span>
+                                </div>
+                                <div className="flex justify-between text-sm">
+                                  <span className="text-muted-foreground">Escrow Fee (2.5%)</span>
+                                  <span>₹{escrowFee}</span>
+                                </div>
+                                <div className="border-t pt-2 flex justify-between font-bold text-lg">
+                                  <span>Total</span>
+                                  <span className="text-primary">₹{totalAmount}</span>
+                                </div>
                               </div>
-                              <div className="flex justify-between text-sm">
-                                <span className="text-muted-foreground">Platform Fee (5%)</span>
-                                <span>${platformFee}</span>
-                              </div>
-                              <div className="flex justify-between text-sm">
-                                <span className="text-muted-foreground">Escrow Fee (2.5%)</span>
-                                <span>${escrowFee}</span>
-                              </div>
-                              <div className="border-t pt-2 flex justify-between font-bold text-lg">
-                                <span>Total</span>
-                                <span className="text-primary">${totalAmount}</span>
-                              </div>
-                            </div>
                           </>
                         )}
                       </div>
@@ -325,7 +325,7 @@ export default function CreatorBooking() {
                     onClick={() => window.location.href = `/payment/${id}?amount=${totalAmount}&services=${selectedServices.join(',')}`}
                   >
                     <DollarSign className="w-4 h-4 mr-2" />
-                    Make Payment (${totalAmount})
+                    Make Payment (₹{totalAmount})
                   </Button>
                 </div>
               </div>

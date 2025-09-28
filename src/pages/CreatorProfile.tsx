@@ -7,16 +7,16 @@ import { useParams } from "react-router-dom";
 
 const creatorData = {
   1: {
-    name: "Sarah Chen",
-    handle: "@sarahcreates",
+    name: "Akarsh Sharma",
+    handle: "@akarshcreates",
     followers: "45K",
-    location: "New York, NY",
+    location: "Mumbai, Maharashtra",
     categories: ["Fashion", "Lifestyle"],
-    ratePerReel: "$150",
-    ratePerPost: "$100",
+    ratePerReel: "₹12,000",
+    ratePerPost: "₹8,000",
     rating: 4.9,
     completedProjects: 127,
-    avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=300&h=300&fit=crop&crop=face",
+    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
     portfolio: [
       "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400&h=400&fit=crop",
       "https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=400&h=400&fit=crop",
@@ -26,7 +26,7 @@ const creatorData = {
     engagement: "8.2%",
     avgViews: "12.5K",
     responseTime: "2 hours",
-    languages: ["English", "Mandarin"],
+    languages: ["English", "Hindi"],
     deliveryTime: "3-5 days",
     revisions: "2 free revisions",
     platforms: ["Instagram", "TikTok", "YouTube"]
