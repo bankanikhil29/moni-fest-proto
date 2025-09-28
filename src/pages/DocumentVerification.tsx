@@ -239,10 +239,8 @@ const DocumentVerification = () => {
              verificationData.fullName && verificationData.dateOfBirth;
     }
     if (currentStep === 2) {
-      const hasRequiredDocs = verificationData.frontImage && verificationData.selfieImage;
-      const hasBackIfNeeded = !['pan', 'passport'].includes(verificationData.documentType) ? 
-        verificationData.backImage : true;
-      return hasRequiredDocs && hasBackIfNeeded;
+      // Allow proceeding without document uploads - documents are optional
+      return true;
     }
     return false;
   };
