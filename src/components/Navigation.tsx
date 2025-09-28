@@ -31,19 +31,6 @@ export default function Navigation() {
           </div>
 
           <div className="hidden md:flex items-center space-x-4">
-            <div className="flex items-center space-x-2">
-              <a href="/creator-dashboard" className="text-muted-foreground hover:text-primary transition-colors text-sm">
-                Creator
-              </a>
-              <span className="text-muted-foreground">|</span>
-              <a href="/brand-dashboard" className="text-muted-foreground hover:text-primary transition-colors text-sm">
-                Brand
-              </a>
-              <span className="text-muted-foreground">|</span>
-              <a href="/manager-dashboard" className="text-muted-foreground hover:text-primary transition-colors text-sm">
-                Manager
-              </a>
-            </div>
             <Button variant="ghost">Sign In</Button>
             <Button variant="coral" size="sm" onClick={() => window.location.href = '/get-started'}>Get Started</Button>
           </div>
