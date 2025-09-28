@@ -6,7 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { ArrowLeft, Calendar, DollarSign, Shield, CheckCircle, Clock, FileText } from "lucide-react";
+import { ArrowLeft, Calendar, DollarSign, Shield, CheckCircle, Clock, FileText, Users, Star } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
@@ -65,27 +65,53 @@ export default function CreatorBooking() {
         <section className="py-12">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
-              {/* Header */}
-              <div className="flex items-center gap-4 mb-8">
+              {/* Creator Profile Header */}
+              <div className="mb-8">
                 <Button 
                   variant="ghost" 
                   size="sm"
                   onClick={() => window.history.back()}
+                  className="mb-4"
                 >
                   <ArrowLeft className="w-4 h-4 mr-2" />
-                  Back to Profile
+                  Back to Find Creators
                 </Button>
-                <div className="flex items-center gap-3">
-                  <img
-                    src={creator.avatar}
-                    alt={creator.name}
-                    className="w-12 h-12 rounded-full object-cover"
-                  />
-                  <div>
-                    <h1 className="text-2xl font-bold">Book {creator.name}</h1>
-                    <p className="text-muted-foreground">{creator.handle}</p>
-                  </div>
-                </div>
+                
+                <Card className="card-soft">
+                  <CardContent className="p-6">
+                    <div className="flex flex-col md:flex-row gap-6 items-start">
+                      <img
+                        src={creator.avatar}
+                        alt={creator.name}
+                        className="w-24 h-24 rounded-full object-cover shadow-lg"
+                      />
+                      <div className="flex-1">
+                        <h1 className="text-3xl font-bold mb-2">{creator.name}</h1>
+                        <p className="text-xl text-accent mb-4">{creator.handle}</p>
+                        
+                        <div className="flex items-center gap-6 mb-4">
+                          <div className="flex items-center gap-2">
+                            <Users className="w-5 h-5 text-accent" />
+                            <span className="font-semibold">45K followers</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <Star className="w-5 h-5 text-highlight fill-current" />
+                            <span className="font-semibold">4.9 rating</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <CheckCircle className="w-5 h-5 text-primary" />
+                            <span className="font-semibold">127 projects</span>
+                          </div>
+                        </div>
+                        
+                        <p className="text-muted-foreground leading-relaxed">
+                          Fashion enthusiast and lifestyle creator passionate about sustainable fashion and authentic storytelling. 
+                          I love collaborating with brands that share my values of quality and sustainability.
+                        </p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
               </div>
 
               <div className="grid lg:grid-cols-3 gap-8">
