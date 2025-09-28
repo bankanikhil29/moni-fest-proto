@@ -11,7 +11,7 @@ export default function Hero() {
               Where <span className="gradient-text">Micro Creators</span> Meet Brands —{" "}
               <span className="text-primary">and Get Paid on Time.</span>
             </h1>
-            <p className="text-xl text-muted-foreground mb-8 max-w-2xl">
+            <p className="text-xl text-muted-foreground mb-8 max-w-2xl text-center">
               A marketplace built for part-time and early-stage creators. Brands discover, 
               creators deliver — payments guaranteed through secure escrow.
             </p>
