@@ -28,7 +28,7 @@ const brands = [
     lookingFor: ["Tech Reviewers", "Lifestyle Creators"],
     requirements: "20K+ followers, tech-focused content",
     deliverables: ["5 Instagram Reels", "3 YouTube Shorts", "2 Feed Posts"],
-    logo: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=100&h=100&fit=crop",
+    logo: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=100&h=100&fit=crop",
     description: "Seeking tech-savvy creators to demonstrate our innovative smart home products and their real-world applications."
   },
   {
