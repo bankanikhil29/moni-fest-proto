@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Star, Instagram, Youtube, MapPin, Shield, CheckCircle } from "lucide-react";
+import { Star, Instagram, MapPin, Shield, CheckCircle } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import priyaImage from "@/assets/creator-priya.jpg";
 import arjunImage from "@/assets/creator-arjun.jpg";
@@ -9,6 +9,8 @@ import kavyaImage from "@/assets/creator-kavya.jpg";
 import rohitImage from "@/assets/creator-rohit.jpg";
 import meeraImage from "@/assets/creator-meera.jpg";
 import devImage from "@/assets/creator-dev.jpg";
+import { useState } from "react";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const creators = [
   {
@@ -16,6 +18,7 @@ const creators = [
     name: "Priya Sharma",
     handle: "@priyafashion",
     followers: "45K",
+    followersNum: 45000,
     location: "Mumbai, Maharashtra",
     categories: ["Fashion", "Lifestyle"],
     ratePerReel: "₹12,000",
@@ -31,6 +34,7 @@ const creators = [
     name: "Arjun Patel",
     handle: "@arjuntech",
     followers: "32K",
+    followersNum: 32000,
     location: "Bangalore, Karnataka", 
     categories: ["Tech", "Gaming"],
     ratePerReel: "₹15,000",
@@ -46,6 +50,7 @@ const creators = [
     name: "Kavya Singh",
     handle: "@kavyabeauty",
     followers: "38K",
+    followersNum: 38000,
     location: "Delhi, NCR",
     categories: ["Beauty", "Skincare"],
     ratePerReel: "₹12,800",
@@ -61,6 +66,7 @@ const creators = [
     name: "Rohit Kumar",
     handle: "@rohitfitness",
     followers: "52K",
+    followersNum: 52000,
     location: "Pune, Maharashtra",
     categories: ["Fitness", "Health"],
     ratePerReel: "₹14,500",
@@ -76,6 +82,7 @@ const creators = [
     name: "Meera Iyer",
     handle: "@meeracooks",
     followers: "35K",
+    followersNum: 35000,
     location: "Chennai, Tamil Nadu",
     categories: ["Food", "Cooking"],
     ratePerReel: "₹11,200",
@@ -91,6 +98,7 @@ const creators = [
     name: "Dev Malhotra",
     handle: "@devtravels",
     followers: "41K",
+    followersNum: 41000,
     location: "Jaipur, Rajasthan",
     categories: ["Travel", "Photography"],
     ratePerReel: "₹13,600",
@@ -106,6 +114,7 @@ const creators = [
     name: "Nishka Gupta",
     handle: "@nishkafoodie",
     followers: "28K",
+    followersNum: 28000,
     location: "Hyderabad, Telangana",
     categories: ["Food", "Travel"],
     ratePerReel: "₹10,500",
@@ -121,9 +130,10 @@ const creators = [
     name: "Aarav Malhotra",
     handle: "@aaravmusic",
     followers: "29K",
+    followersNum: 29000,
     location: "Kolkata, West Bengal",
     categories: ["Music", "Entertainment"],
-    ratePerReel: "₹12,400",
+    ratePerReel: "₹10,800",
     ratePerPost: "₹7,200",
     rating: 4.6,
     completedProjects: 112,
@@ -134,6 +144,24 @@ const creators = [
 ];
 
 export default function FindCreators() {
+  const [followerFilter, setFollowerFilter] = useState<string>("all");
+  const [categoryFilter, setCategoryFilter] = useState<string>("all");
+
+  const filteredCreators = creators.filter(creator => {
+    const matchesFollowers = 
+      followerFilter === "all" ||
+      (followerFilter === "under10k" && creator.followersNum < 10000) ||
+      (followerFilter === "10k-25k" && creator.followersNum >= 10000 && creator.followersNum <= 25000) ||
+      (followerFilter === "25k-50k" && creator.followersNum > 25000 && creator.followersNum <= 50000) ||
+      (followerFilter === "50k+" && creator.followersNum > 50000);
+    
+    const matchesCategory = 
+      categoryFilter === "all" ||
+      creator.categories.some(cat => cat.toLowerCase() === categoryFilter.toLowerCase());
+
+    return matchesFollowers && matchesCategory;
+  });
+
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
@@ -149,8 +177,43 @@ export default function FindCreators() {
               </p>
             </div>
 
+            <div className="flex flex-wrap gap-4 mb-8 justify-center">
+              <div className="w-full sm:w-auto">
+                <Select value={followerFilter} onValueChange={setFollowerFilter}>
+                  <SelectTrigger className="w-full sm:w-[200px]">
+                    <SelectValue placeholder="Follower Range" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">All Followers</SelectItem>
+                    <SelectItem value="under10k">&lt;10K</SelectItem>
+                    <SelectItem value="10k-25k">10K-25K</SelectItem>
+                    <SelectItem value="25k-50k">25K-50K</SelectItem>
+                    <SelectItem value="50k+">50K+</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              
+              <div className="w-full sm:w-auto">
+                <Select value={categoryFilter} onValueChange={setCategoryFilter}>
+                  <SelectTrigger className="w-full sm:w-[200px]">
+                    <SelectValue placeholder="Category" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">All Categories</SelectItem>
+                    <SelectItem value="fashion">Fashion</SelectItem>
+                    <SelectItem value="beauty">Beauty</SelectItem>
+                    <SelectItem value="fitness">Fitness</SelectItem>
+                    <SelectItem value="food">Food</SelectItem>
+                    <SelectItem value="travel">Travel</SelectItem>
+                    <SelectItem value="tech">Tech</SelectItem>
+                    <SelectItem value="lifestyle">Lifestyle</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {creators.map((creator) => (
+              {filteredCreators.map((creator) => (
                 <div key={creator.id} className="relative group">
                   <Card className="card-soft hover:shadow-lg transition-all duration-300 cursor-pointer">
                     <CardContent className="p-6">
@@ -203,49 +266,40 @@ export default function FindCreators() {
                       <div className="bg-secondary rounded-lg p-3 mb-4">
                         <div className="flex justify-between items-center">
                           <span className="text-sm text-muted-foreground">Rate per Reel:</span>
-                          <span className="font-semibold text-primary">{creator.ratePerReel}</span>
+                          <span className="font-semibold text-accent">{creator.ratePerReel}</span>
                         </div>
                         <div className="flex justify-between items-center">
                           <span className="text-sm text-muted-foreground">Rate per Post:</span>
-                          <span className="font-semibold text-primary">{creator.ratePerPost}</span>
+                          <span className="font-semibold text-accent">{creator.ratePerPost}</span>
                         </div>
                       </div>
 
                       <div className="flex gap-2">
                         <Button 
                           className="flex-1" 
-                          variant="coral"
                           onClick={() => window.location.href = `/creator-profile/${creator.id}`}
                         >
                           Contact Creator
                         </Button>
-                        <Button variant="outline" size="sm">
+                        <Button 
+                          variant="outline"
+                          onClick={() => window.location.href = `/creator-profile/${creator.id}`}
+                        >
                           View Portfolio
                         </Button>
                       </div>
                     </CardContent>
-
-                    {/* Hover Popup */}
-                    <div className="absolute inset-0 bg-black/60 rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none group-hover:pointer-events-auto">
-                      <div className="bg-white rounded-lg p-4 shadow-xl transform scale-95 group-hover:scale-100 transition-transform duration-300">
-                        <div className="text-center">
-                          <h4 className="font-semibold text-lg mb-2 text-gray-900">
-                            {creator.name}
-                          </h4>
-                          <p className="text-sm text-gray-600 mb-4">
-                            Ready to collaborate?
-                          </p>
-                          <Button 
-                            variant="coral"
-                            onClick={() => window.location.href = `/creator-booking/${creator.id}`}
-                            className="w-full"
-                          >
-                            Book Creator
-                          </Button>
-                        </div>
-                      </div>
-                    </div>
                   </Card>
+
+                  <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center pointer-events-none">
+                    <Button 
+                      size="lg"
+                      className="pointer-events-auto"
+                      onClick={() => window.location.href = `/creator-booking/${creator.id}`}
+                    >
+                      Book Creator
+                    </Button>
+                  </div>
                 </div>
               ))}
             </div>

@@ -10,17 +10,84 @@ import { ArrowLeft, Calendar, DollarSign, Shield, CheckCircle, Clock, FileText, 
 import Navigation from "@/components/Navigation";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
+import priyaImage from "@/assets/creator-priya.jpg";
+import arjunImage from "@/assets/creator-arjun.jpg";
+import kavyaImage from "@/assets/creator-kavya.jpg";
+import rohitImage from "@/assets/creator-rohit.jpg";
+import meeraImage from "@/assets/creator-meera.jpg";
+import devImage from "@/assets/creator-dev.jpg";
 
 const creatorData = {
   1: {
-    name: "Akarsh Sharma",
-    handle: "@akarshcreates",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face",
+    name: "Priya Sharma",
+    handle: "@priyafashion",
+    avatar: priyaImage,
+    followers: "45K",
     services: [
       { name: "Instagram Reel", price: 12000, description: "15-30 second engaging reel with trending audio" },
       { name: "Instagram Post", price: 8000, description: "High-quality photo post with caption" },
       { name: "Story Series", price: 6000, description: "3-5 Instagram stories showcasing your product" },
       { name: "YouTube Integration", price: 16000, description: "Product placement in YouTube video" }
+    ]
+  },
+  2: {
+    name: "Arjun Patel",
+    handle: "@arjuntech",
+    avatar: arjunImage,
+    followers: "32K",
+    services: [
+      { name: "Instagram Reel", price: 15000, description: "Tech review reel with product demonstration" },
+      { name: "Instagram Post", price: 9500, description: "Detailed tech review post with specs" },
+      { name: "Story Series", price: 7000, description: "Product unboxing story series" },
+      { name: "YouTube Video", price: 20000, description: "In-depth tech review video" }
+    ]
+  },
+  3: {
+    name: "Kavya Singh",
+    handle: "@kavyabeauty",
+    avatar: kavyaImage,
+    followers: "38K",
+    services: [
+      { name: "Instagram Reel", price: 12800, description: "Beauty tutorial reel" },
+      { name: "Instagram Post", price: 7600, description: "Product review post with swatches" },
+      { name: "Story Series", price: 6500, description: "Get ready with me featuring product" },
+      { name: "YouTube Tutorial", price: 18000, description: "Full makeup tutorial video" }
+    ]
+  },
+  4: {
+    name: "Rohit Kumar",
+    handle: "@rohitfitness",
+    avatar: rohitImage,
+    followers: "52K",
+    services: [
+      { name: "Instagram Reel", price: 14500, description: "Workout routine reel" },
+      { name: "Instagram Post", price: 8800, description: "Fitness transformation post" },
+      { name: "Story Series", price: 7500, description: "Day in the life fitness stories" },
+      { name: "YouTube Video", price: 22000, description: "Complete workout program video" }
+    ]
+  },
+  5: {
+    name: "Meera Iyer",
+    handle: "@meeracooks",
+    avatar: meeraImage,
+    followers: "35K",
+    services: [
+      { name: "Instagram Reel", price: 11200, description: "Recipe reel with product" },
+      { name: "Instagram Post", price: 6800, description: "Food photography post" },
+      { name: "Story Series", price: 5500, description: "Cooking process stories" },
+      { name: "YouTube Recipe", price: 17000, description: "Full recipe tutorial video" }
+    ]
+  },
+  6: {
+    name: "Dev Malhotra",
+    handle: "@devtravels",
+    avatar: devImage,
+    followers: "41K",
+    services: [
+      { name: "Instagram Reel", price: 13600, description: "Travel destination reel" },
+      { name: "Instagram Post", price: 8400, description: "Travel photography post" },
+      { name: "Story Series", price: 7000, description: "Travel vlog stories" },
+      { name: "YouTube Vlog", price: 19000, description: "Complete travel vlog video" }
     ]
   }
 };
@@ -92,7 +159,7 @@ export default function CreatorBooking() {
                         <div className="flex items-center gap-6 mb-4">
                           <div className="flex items-center gap-2">
                             <Users className="w-5 h-5 text-accent" />
-                            <span className="font-semibold">45K followers</span>
+                            <span className="font-semibold">{creator.followers} followers</span>
                           </div>
                           <div className="flex items-center gap-2">
                             <Star className="w-5 h-5 text-highlight fill-current" />
