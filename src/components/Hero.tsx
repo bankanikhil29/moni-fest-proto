@@ -8,12 +8,8 @@ export default function Hero() {
     <section className="relative brand-gradient py-20 lg:py-32 overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div className="text-center lg:text-left">
-            <div className="flex items-center justify-center lg:justify-start mb-8">
-              <img src={monifestLogo} alt="Moni-Fest Logo" className="h-14 w-auto mr-3" />
-              <h2 className="text-2xl font-bold text-white">MONI-FEST</h2>
-            </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-white">
+        <div className="text-center lg:text-left">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-white">
               Manifest Your <span className="text-white font-extrabold">Influencer</span> &
               <span className="text-white font-extrabold">Brand Deals</span> Into Reality
             </h1>
