@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
-import monifestLogo from "@/assets/monifest-logo-clean.png";
+import monifestLogo from "@/assets/monifest-logo-rupee.png";
 
 export default function Navigation() {
   return (
