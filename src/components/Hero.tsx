@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/creators-workspace.jpg";
 import monifestLogo from "@/assets/monifest-logo.png";
+import { CheckCircle } from "lucide-react";
 
 export default function Hero() {
   return (
@@ -8,20 +9,16 @@ export default function Hero() {
       <div className="container mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="text-center lg:text-left">
-            <div className="flex items-center justify-center lg:justify-start mb-6">
-              <img src={monifestLogo} alt="Moni-Fest Logo" className="h-16 w-auto mr-4" />
-              <div>
-                <h2 className="text-2xl font-bold text-white">MONI-FEST</h2>
-                <p className="text-sm text-white/80">MANIFEST COLLABS | MANIFEST MONEY</p>
-              </div>
+            <div className="flex items-center justify-center lg:justify-start mb-8">
+              <img src={monifestLogo} alt="Moni-Fest Logo" className="h-14 w-auto mr-3" />
+              <h2 className="text-2xl font-bold text-white">MONI-FEST</h2>
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-white">
               Manifest Your <span className="text-white font-extrabold">Influencer</span> &
               <span className="text-white font-extrabold">Brand Deals</span> Into Reality
             </h1>
-            <p className="text-xl text-white/80 mb-8 max-w-2xl text-center lg:text-left">
-              A marketplace built for part-time and early-stage creators. Brands discover, 
-              creators deliver — payments guaranteed through secure escrow.
+            <p className="text-xl text-white/90 mb-8 max-w-2xl text-center lg:text-left">
+              Brands discover, creators deliver — payments guaranteed through secure escrow.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <Button size="lg" className="text-lg px-8 bg-white text-primary hover:bg-white/90" onClick={() => window.location.href = '/find-creators'}>
@@ -34,18 +31,14 @@ export default function Hero() {
                 Join as a Creator
               </Button>
             </div>
-            <div className="mt-8 flex items-center gap-6 justify-center lg:justify-start text-sm text-white/80">
+            <div className="mt-8 flex items-center gap-6 justify-center lg:justify-start text-sm text-white/90">
               <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-white rounded-full"></div>
+                <CheckCircle className="w-4 h-4" />
                 <span>Escrow Protected</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-highlight rounded-full"></div>
+                <CheckCircle className="w-4 h-4" />
                 <span>Verified Creators</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-white rounded-full"></div>
-                <span>Guaranteed Payments</span>
               </div>
             </div>
           </div>
