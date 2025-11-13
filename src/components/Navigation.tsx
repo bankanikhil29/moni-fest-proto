@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
-import monifestLogo from "@/assets/monifest-logo-rupee.png";
+import monifestLogo from "@/assets/monifest-logo-pink.png";
 
 export default function Navigation() {
   return (
@@ -11,7 +11,7 @@ export default function Navigation() {
           <div className="flex items-center">
             <a href="/" className="flex items-center gap-3 text-2xl font-bold hover:opacity-80 transition-opacity cursor-pointer">
               <img src={monifestLogo} alt="Moni-Fest Logo" className="w-10 h-10" />
-              <span className="text-primary">MONI-FEST</span>
+              <span className="text-primary">MONI<span className="text-[0.8em] text-muted-foreground">-</span><span className="text-accent">FEST</span></span>
             </a>
           </div>
           
@@ -47,7 +47,7 @@ export default function Navigation() {
                   <div className="py-4 border-b">
                     <a href="/" className="flex items-center gap-3 text-2xl font-bold">
                       <img src={monifestLogo} alt="Moni-Fest Logo" className="w-10 h-10" />
-                      <span className="text-primary">MONI-FEST</span>
+                      <span className="text-primary">MONI<span className="text-[0.8em] text-muted-foreground">-</span><span className="text-accent">FEST</span></span>
                     </a>
                   </div>
                   
