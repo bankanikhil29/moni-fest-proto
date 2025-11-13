@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
-import monifestLogo from "@/assets/monifest-logo.png";
+import monifestLogo from "@/assets/monifest-logo-clean.png";
 
 export default function Navigation() {
   return (
@@ -16,10 +16,10 @@ export default function Navigation() {
           </div>
           
           <div className="hidden md:flex items-center space-x-8">
-            <a href="#about" className="text-muted-foreground hover:text-primary transition-colors">
+            <a href="/#about" className="text-muted-foreground hover:text-primary transition-colors">
               About Us
             </a>
-            <a href="#features" className="text-muted-foreground hover:text-primary transition-colors">
+            <a href="/#features" className="text-muted-foreground hover:text-primary transition-colors">
               Features
             </a>
             <a href="/find-creators" className="text-muted-foreground hover:text-primary transition-colors">
@@ -54,10 +54,10 @@ export default function Navigation() {
                   <div className="flex-1 py-4 space-y-4">
                     <div className="space-y-2">
                       <h3 className="text-sm font-medium text-muted-foreground px-2">Navigation</h3>
-                      <a href="#about" className="block px-2 py-2 text-muted-foreground hover:text-primary transition-colors">
+                      <a href="/#about" className="block px-2 py-2 text-muted-foreground hover:text-primary transition-colors">
                         About Us
                       </a>
-                      <a href="#features" className="block px-2 py-2 text-muted-foreground hover:text-primary transition-colors">
+                      <a href="/#features" className="block px-2 py-2 text-muted-foreground hover:text-primary transition-colors">
                         Features
                       </a>
                       <a href="/find-creators" className="block px-2 py-2 text-muted-foreground hover:text-primary transition-colors">
