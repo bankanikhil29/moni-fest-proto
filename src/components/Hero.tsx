@@ -30,7 +30,7 @@ export default function Hero() {
               <Button size="lg" className="text-lg px-8 bg-white text-primary hover:bg-white/90" onClick={() => window.location.href = '/find-brands'}>
                 Find Brands
               </Button>
-              <Button variant="outline" size="lg" className="text-lg px-8 border-white text-white hover:bg-white hover:text-primary" onClick={() => window.location.href = '/join-as-creator'}>
+              <Button variant="outline-white" size="lg" className="text-lg px-8" onClick={() => window.location.href = '/join-as-creator'}>
                 Join as a Creator
               </Button>
             </div>
