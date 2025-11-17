@@ -5,40 +5,40 @@ import monifestLogo from "@/assets/monifest-icon-clean.png";
 
 export default function Navigation() {
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-[#FF5DA2]/95 via-[#E68ACB]/95 to-[#9D4EDD]/95 backdrop-blur-md border-b border-white/10 shadow-lg">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
             <a href="/" className="flex items-center gap-3 text-2xl font-bold hover:opacity-80 transition-opacity cursor-pointer">
               <img src={monifestLogo} alt="Moni-Fest Logo" className="w-10 h-10" />
-              <span className="text-primary">MONI<span className="text-[0.8em] text-muted-foreground">-</span><span className="text-accent">FEST</span></span>
+              <span className="text-white">MONI<span className="text-[0.8em] text-white/70">-</span><span className="text-white">FEST</span></span>
             </a>
           </div>
           
           <div className="hidden md:flex items-center space-x-8">
-            <a href="/#about" className="text-muted-foreground hover:text-primary transition-colors">
+            <a href="/#about" className="text-white/90 hover:text-white transition-colors font-medium">
               About Us
             </a>
-            <a href="/#features" className="text-muted-foreground hover:text-primary transition-colors">
+            <a href="/#features" className="text-white/90 hover:text-white transition-colors font-medium">
               Features
             </a>
-            <a href="/find-creators" className="text-muted-foreground hover:text-primary transition-colors">
+            <a href="/find-creators" className="text-white/90 hover:text-white transition-colors font-medium">
               Find Creators
             </a>
-            <a href="/find-brands" className="text-muted-foreground hover:text-primary transition-colors">
+            <a href="/find-brands" className="text-white/90 hover:text-white transition-colors font-medium">
               Brands
             </a>
           </div>
 
           <div className="hidden md:flex items-center space-x-4">
-            <Button variant="ghost">Sign In</Button>
-            <Button variant="coral" size="sm" onClick={() => window.location.href = '/user-type-selection'}>Get Started</Button>
+            <Button variant="ghost" className="text-white hover:bg-white/20">Sign In</Button>
+            <Button variant="default" size="sm" className="bg-white text-primary hover:bg-white/90" onClick={() => window.location.href = '/user-type-selection'}>Get Started</Button>
           </div>
 
           <div className="md:hidden">
             <Sheet>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon">
+                <Button variant="ghost" size="icon" className="text-white hover:bg-white/20">
                   <Menu className="h-5 w-5" />
                 </Button>
               </SheetTrigger>
