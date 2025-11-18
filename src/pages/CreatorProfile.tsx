@@ -1,9 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Star, Instagram, Youtube, MapPin, Calendar, DollarSign, CheckCircle, Users, Camera, TrendingUp, ArrowLeft } from "lucide-react";
+import { Star, Instagram, Youtube, MapPin, Calendar, DollarSign, CheckCircle, Users, Camera, TrendingUp, ArrowLeft, Sparkles } from "lucide-react";
 import Navigation from "@/components/Navigation";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
+import { goToCampaignWizard } from "@/lib/utils";
 
 const creatorData = {
   1: {
@@ -196,14 +197,26 @@ export default function CreatorProfile() {
                     ))}
                   </div>
 
-                  <div className="sticky top-24">
+                      <div className="sticky top-24">
                     <Card className="card-soft border-primary/20">
                       <CardContent className="p-6">
                         <h3 className="text-xl font-semibold mb-4">Ready to collaborate?</h3>
                         <p className="text-muted-foreground mb-6">Let's discuss your project and create amazing content together!</p>
                         <Button 
+                          className="w-full mb-3"
+                          asChild
+                        >
+                          <Link 
+                            to={goToCampaignWizard(id || '')}
+                            aria-label={`Run campaign with ${creator.name}`}
+                          >
+                            <Sparkles className="w-4 h-4 mr-2" />
+                            Run Campaign
+                          </Link>
+                        </Button>
+                        <Button 
                           className="w-full mb-3" 
-                          variant="coral"
+                          variant="outline"
                           onClick={() => window.location.href = `/creator-booking/${id}`}
                         >
                           <DollarSign className="w-4 h-4 mr-2" />
