@@ -16,17 +16,20 @@ export default function Navigation() {
           </div>
           
           <div className="hidden md:flex items-center space-x-8">
-            <a href="/#about" className="text-white/90 hover:text-white transition-colors font-medium">
-              About Us
-            </a>
-            <a href="/#features" className="text-white/90 hover:text-white transition-colors font-medium">
-              Features
-            </a>
             <a href="/find-creators" className="text-white/90 hover:text-white transition-colors font-medium">
               Find Creators
             </a>
             <a href="/find-brands" className="text-white/90 hover:text-white transition-colors font-medium">
               Brands
+            </a>
+            <a href="/campaigns" className="text-white/90 hover:text-white transition-colors font-medium">
+              Campaigns
+            </a>
+            <a href="/#about" className="text-white/90 hover:text-white transition-colors font-medium">
+              About Us
+            </a>
+            <a href="/#features" className="text-white/90 hover:text-white transition-colors font-medium">
+              Features
             </a>
           </div>
 
@@ -54,17 +57,20 @@ export default function Navigation() {
                   <div className="flex-1 py-4 space-y-4">
                     <div className="space-y-2">
                       <h3 className="text-sm font-medium text-muted-foreground px-2">Navigation</h3>
-                      <a href="/#about" className="block px-2 py-2 text-muted-foreground hover:text-primary transition-colors">
-                        About Us
-                      </a>
-                      <a href="/#features" className="block px-2 py-2 text-muted-foreground hover:text-primary transition-colors">
-                        Features
-                      </a>
                       <a href="/find-creators" className="block px-2 py-2 text-muted-foreground hover:text-primary transition-colors">
                         Find Creators
                       </a>
                       <a href="/find-brands" className="block px-2 py-2 text-muted-foreground hover:text-primary transition-colors">
                         Brands
+                      </a>
+                      <a href="/campaigns" className="block px-2 py-2 text-muted-foreground hover:text-primary transition-colors">
+                        Campaigns
+                      </a>
+                      <a href="/#about" className="block px-2 py-2 text-muted-foreground hover:text-primary transition-colors">
+                        About Us
+                      </a>
+                      <a href="/#features" className="block px-2 py-2 text-muted-foreground hover:text-primary transition-colors">
+                        Features
                       </a>
                     </div>
                     
