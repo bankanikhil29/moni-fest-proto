@@ -7,12 +7,13 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import CampaignsLayout from "@/components/CampaignsLayout";
 import Navigation from "@/components/Navigation";
-import { cn } from "@/lib/utils";
+import { cn, formatINR } from "@/lib/utils";
 import { useState, useEffect, useRef } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import { creators, Creator } from "@/data/creators";
 import { Star, Instagram, MapPin, CheckCircle, X, ChevronLeft, ChevronRight, Upload, Link as LinkIcon, IndianRupee, Target, Users } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useCampaigns } from "@/contexts/CampaignStore";
 
 const steps = [
   { id: 1, name: "Creator" },
@@ -57,21 +58,15 @@ const PLATFORM_OPTIONS = [
   "YouTube Shorts"
 ];
 
-const formatINR = (value: number): string => {
-  return new Intl.NumberFormat('en-IN', {
-    style: 'currency',
-    currency: 'INR',
-    maximumFractionDigits: 0,
-  }).format(value);
-};
-
 export default function CreateCampaignWizardPage() {
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(1);
   const creatorGridRef = useRef<HTMLDivElement>(null);
   const contentUploadRef = useRef<HTMLInputElement>(null);
   const contentLinkRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
+  const { addCampaign } = useCampaigns();
   
   const [wizardState, setWizardState] = useState<WizardState>(() => {
     const defaultState: WizardState = {
@@ -177,11 +172,33 @@ export default function CreateCampaignWizardPage() {
   };
 
   const handleLaunchCampaign = () => {
-    console.log("Campaign state:", wizardState);
-    toast({
-      title: "Campaign Captured",
-      description: "No backend yet — check console for full state",
+    if (!wizardState.creatorSummary) return;
+
+    const campaignId = addCampaign({
+      creator: {
+        id: String(wizardState.creatorId || 0),
+        name: wizardState.creatorSummary.name,
+        avatar: wizardState.creatorSummary.avatar,
+        handle: `@${wizardState.creatorSummary.name.toLowerCase().replace(/\s+/g, '')}`,
+      },
+      objective: wizardState.objective,
+      brief: wizardState.brief,
+      contentType: wizardState.contentType,
+      contentRef: wizardState.contentType === 'upload' ? wizardState.contentFilePreview : wizardState.contentLink,
+      budgetINR: wizardState.budgetINR,
+      audiencePreset: wizardState.audiencePreset,
+      platforms: wizardState.platforms,
     });
+
+    // Reset wizard state
+    localStorage.removeItem("campaignWizardState");
+    
+    toast({
+      title: "Campaign launched",
+      description: "Your campaign is now active.",
+    });
+
+    navigate(`/campaigns/${campaignId}`);
   };
 
   const handleBack = () => {
