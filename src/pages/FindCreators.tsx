@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Star, Instagram, MapPin, Shield, CheckCircle } from "lucide-react";
+import { Star, Instagram, MapPin, Shield, CheckCircle, Sparkles } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import priyaImage from "@/assets/creator-priya.jpg";
 import arjunImage from "@/assets/creator-arjun.jpg";
@@ -11,6 +11,8 @@ import meeraImage from "@/assets/creator-meera.jpg";
 import devImage from "@/assets/creator-dev.jpg";
 import { useState } from "react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Link } from "react-router-dom";
+import { goToCampaignWizard } from "@/lib/utils";
 
 const creators = [
   {
@@ -274,19 +276,36 @@ export default function FindCreators() {
                         </div>
                       </div>
 
-                      <div className="flex gap-2">
+                      <div className="flex flex-col gap-2">
                         <Button 
-                          className="flex-1" 
-                          onClick={() => window.location.href = `/creator-profile/${creator.id}`}
+                          size="sm"
+                          asChild
                         >
-                          Contact Creator
+                          <Link 
+                            to={goToCampaignWizard(creator.id)}
+                            aria-label={`Run campaign with ${creator.name}`}
+                          >
+                            <Sparkles className="w-4 h-4 mr-2" />
+                            Run Campaign
+                          </Link>
                         </Button>
-                        <Button 
-                          variant="outline"
-                          onClick={() => window.location.href = `/creator-profile/${creator.id}`}
-                        >
-                          View Portfolio
-                        </Button>
+                        <div className="flex gap-2">
+                          <Button 
+                            size="sm"
+                            variant="outline"
+                            className="flex-1" 
+                            onClick={() => window.location.href = `/creator-profile/${creator.id}`}
+                          >
+                            Contact
+                          </Button>
+                          <Button 
+                            size="sm"
+                            variant="outline"
+                            onClick={() => window.location.href = `/creator-profile/${creator.id}`}
+                          >
+                            Portfolio
+                          </Button>
+                        </div>
                       </div>
                     </CardContent>
                   </Card>
