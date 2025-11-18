@@ -5,6 +5,7 @@ import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { CampaignProvider } from "./contexts/CampaignStore";
 import Index from "./pages/Index";
 import FindCreators from "./pages/FindCreators";
 import FindBrands from "./pages/FindBrands";
@@ -78,13 +79,15 @@ const AppLayout = () => {
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <AppLayout />
-      </BrowserRouter>
-    </TooltipProvider>
+    <CampaignProvider>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <AppLayout />
+        </BrowserRouter>
+      </TooltipProvider>
+    </CampaignProvider>
   </QueryClientProvider>
 );
 
