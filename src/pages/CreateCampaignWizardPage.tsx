@@ -74,54 +74,7 @@ export default function CreateCampaignWizardPage() {
   const { toast } = useToast();
   
   const [wizardState, setWizardState] = useState<WizardState>(() => {
-    // Load from localStorage
-    const saved = localStorage.getItem("campaignWizardState");
-    if (saved) {
-      try {
-        return JSON.parse(saved);
-      } catch {
-        return {
-          creatorId: null,
-          creatorSummary: null,
-          objective: "awareness",
-          brief: "",
-          contentType: 'upload',
-          contentFilePreview: "",
-          contentLink: "",
-          budgetINR: 0,
-          audiencePreset: 'India',
-          platforms: [],
-        };
-      }
-    }
-    
-    // Check for URL parameter
-    const creatorIdParam = searchParams.get("creatorId");
-    if (creatorIdParam) {
-      const creatorId = parseInt(creatorIdParam);
-      const creator = creators.find(c => c.id === creatorId);
-      if (creator) {
-        return {
-          creatorId: creator.id,
-          creatorSummary: {
-            name: creator.name,
-            avatar: creator.avatar,
-            followers: creator.followers,
-            categories: creator.categories,
-          },
-          objective: "awareness",
-          brief: "",
-          contentType: 'upload',
-          contentFilePreview: "",
-          contentLink: "",
-          budgetINR: 0,
-          audiencePreset: 'India',
-          platforms: [],
-        };
-      }
-    }
-    
-    return {
+    const defaultState: WizardState = {
       creatorId: null,
       creatorSummary: null,
       objective: "awareness",
@@ -133,6 +86,38 @@ export default function CreateCampaignWizardPage() {
       audiencePreset: 'India',
       platforms: [],
     };
+
+    // Load from localStorage and merge with defaults
+    const saved = localStorage.getItem("campaignWizardState");
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        return { ...defaultState, ...parsed };
+      } catch {
+        return defaultState;
+      }
+    }
+    
+    // Check for URL parameter
+    const creatorIdParam = searchParams.get("creatorId");
+    if (creatorIdParam) {
+      const creatorId = parseInt(creatorIdParam);
+      const creator = creators.find(c => c.id === creatorId);
+      if (creator) {
+        return {
+          ...defaultState,
+          creatorId: creator.id,
+          creatorSummary: {
+            name: creator.name,
+            avatar: creator.avatar,
+            followers: creator.followers,
+            categories: creator.categories,
+          },
+        };
+      }
+    }
+    
+    return defaultState;
   });
 
   // Persist to localStorage
