@@ -23,6 +23,9 @@ import CreatorProfile from "./pages/CreatorProfile";
 import CreatorBooking from "./pages/CreatorBooking";
 import PaymentPage from "./pages/PaymentPage";
 import NotFound from "./pages/NotFound";
+import CampaignsListPage from "./pages/CampaignsListPage";
+import CampaignDetailsPage from "./pages/CampaignDetailsPage";
+import CreateCampaignWizardPage from "./pages/CreateCampaignWizardPage";
 
 const queryClient = new QueryClient();
 
@@ -65,6 +68,9 @@ const AppLayout = () => {
       <Route path="/creator-profile/:id" element={<CreatorProfile />} />
       <Route path="/creator-booking/:id" element={<CreatorBooking />} />
       <Route path="/payment/:id" element={<PaymentPage />} />
+      <Route path="/campaigns" element={<CampaignsListPage />} />
+      <Route path="/campaigns/:id" element={<CampaignDetailsPage />} />
+      <Route path="/create-campaign" element={<CreateCampaignWizardPage />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
