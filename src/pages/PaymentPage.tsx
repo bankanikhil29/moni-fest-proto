@@ -8,6 +8,7 @@ import { ArrowLeft, CreditCard, Shield, Lock, CheckCircle, AlertCircle, Calendar
 import Navigation from "@/components/Navigation";
 import { useParams, useSearchParams } from "react-router-dom";
 import { useState } from "react";
+import { paymentCardSchema } from "@/lib/validation";
 
 const creatorData = {
   1: {
@@ -33,12 +34,26 @@ export default function PaymentPage() {
     country: '',
     zip: ''
   });
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   if (!creator) {
     return <div>Creator not found</div>;
   }
 
   const handlePayment = () => {
+    if (paymentMethod === 'card') {
+      const result = paymentCardSchema.safeParse(cardDetails);
+      if (!result.success) {
+        const newErrors: Record<string, string> = {};
+        result.error.errors.forEach(err => {
+          newErrors[err.path[0] as string] = err.message;
+        });
+        setErrors(newErrors);
+        return;
+      }
+      setErrors({});
+    }
+    
     // Simulate payment processing
     setTimeout(() => {
       window.location.href = `/payment-success/${id}`;
@@ -126,6 +141,9 @@ export default function PaymentPage() {
                               value={cardDetails.number}
                               onChange={(e) => setCardDetails(prev => ({ ...prev, number: e.target.value }))}
                             />
+                            {errors.number && (
+                              <p className="text-sm text-destructive mt-1">{errors.number}</p>
+                            )}
                           </div>
                           
                           <div className="grid grid-cols-2 gap-4">
@@ -137,6 +155,9 @@ export default function PaymentPage() {
                                 value={cardDetails.expiry}
                                 onChange={(e) => setCardDetails(prev => ({ ...prev, expiry: e.target.value }))}
                               />
+                              {errors.expiry && (
+                                <p className="text-sm text-destructive mt-1">{errors.expiry}</p>
+                              )}
                             </div>
                             <div>
                               <Label htmlFor="cvc">CVC</Label>
@@ -146,6 +167,9 @@ export default function PaymentPage() {
                                 value={cardDetails.cvc}
                                 onChange={(e) => setCardDetails(prev => ({ ...prev, cvc: e.target.value }))}
                               />
+                              {errors.cvc && (
+                                <p className="text-sm text-destructive mt-1">{errors.cvc}</p>
+                              )}
                             </div>
                           </div>
 
@@ -157,6 +181,9 @@ export default function PaymentPage() {
                               value={cardDetails.name}
                               onChange={(e) => setCardDetails(prev => ({ ...prev, name: e.target.value }))}
                             />
+                            {errors.name && (
+                              <p className="text-sm text-destructive mt-1">{errors.name}</p>
+                            )}
                           </div>
 
                           <div className="grid grid-cols-2 gap-4">
@@ -174,6 +201,9 @@ export default function PaymentPage() {
                                   <SelectItem value="fr">France</SelectItem>
                                 </SelectContent>
                               </Select>
+                              {errors.country && (
+                                <p className="text-sm text-destructive mt-1">{errors.country}</p>
+                              )}
                             </div>
                             <div>
                               <Label htmlFor="zip">ZIP Code</Label>
@@ -183,6 +213,9 @@ export default function PaymentPage() {
                                 value={cardDetails.zip}
                                 onChange={(e) => setCardDetails(prev => ({ ...prev, zip: e.target.value }))}
                               />
+                              {errors.zip && (
+                                <p className="text-sm text-destructive mt-1">{errors.zip}</p>
+                              )}
                             </div>
                           </div>
                         </div>

@@ -92,6 +92,57 @@ export const campaignBriefSchema = z.string()
   .max(1000, 'Brief must be ≤ 1000 characters')
   .refine(v => !/[<>]/.test(v), 'Please remove < and >');
 
+// Luhn algorithm for card validation
+function luhnCheck(cardNumber: string): boolean {
+  const digits = cardNumber.replace(/\D/g, '');
+  let sum = 0;
+  let isEven = false;
+  
+  for (let i = digits.length - 1; i >= 0; i--) {
+    let digit = parseInt(digits[i]);
+    if (isEven) {
+      digit *= 2;
+      if (digit > 9) digit -= 9;
+    }
+    sum += digit;
+    isEven = !isEven;
+  }
+  
+  return sum % 10 === 0;
+}
+
+function isNotExpired(expiry: string): boolean {
+  const [month, year] = expiry.split('/');
+  if (!month || !year) return false;
+  const expiryDate = new Date(2000 + parseInt(year), parseInt(month));
+  return expiryDate > new Date();
+}
+
+// Payment card schema
+export const paymentCardSchema = z.object({
+  number: z.string()
+    .trim()
+    .regex(/^\d{13,19}$/, 'Card number must be 13-19 digits')
+    .refine(luhnCheck, 'Invalid card number'),
+  expiry: z.string()
+    .trim()
+    .regex(/^(0[1-9]|1[0-2])\/\d{2}$/, 'Format: MM/YY')
+    .refine(isNotExpired, 'Card has expired'),
+  cvc: z.string()
+    .trim()
+    .regex(/^\d{3,4}$/, 'CVC must be 3 or 4 digits'),
+  name: z.string()
+    .trim()
+    .min(2, 'Required')
+    .max(100, 'Max 100 characters')
+    .regex(/^[a-zA-Z\s]+$/, 'Letters only'),
+  country: z.string().min(1, 'Please select a country'),
+  zip: z.string()
+    .trim()
+    .min(3, 'Required')
+    .max(10, 'Max 10 characters')
+});
+
 // File validation helper
 export function validateFile(
   file: File, 
