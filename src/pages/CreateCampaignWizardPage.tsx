@@ -7,14 +7,12 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import CampaignsLayout from "@/components/CampaignsLayout";
 import Navigation from "@/components/Navigation";
-import { cn, formatINR } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import { useState, useEffect, useRef } from "react";
-import { useSearchParams, useNavigate } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { creators, Creator } from "@/data/creators";
 import { Star, Instagram, MapPin, CheckCircle, X, ChevronLeft, ChevronRight, Upload, Link as LinkIcon, IndianRupee, Target, Users } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { useCampaigns } from "@/contexts/CampaignStore";
-import { validateContentFile, sanitizeFilename, createSafePreviewUrl } from "@/lib/file-validation";
 
 const steps = [
   { id: 1, name: "Creator" },
@@ -59,18 +57,71 @@ const PLATFORM_OPTIONS = [
   "YouTube Shorts"
 ];
 
+const formatINR = (value: number): string => {
+  return new Intl.NumberFormat('en-IN', {
+    style: 'currency',
+    currency: 'INR',
+    maximumFractionDigits: 0,
+  }).format(value);
+};
+
 export default function CreateCampaignWizardPage() {
   const [searchParams] = useSearchParams();
-  const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(1);
   const creatorGridRef = useRef<HTMLDivElement>(null);
   const contentUploadRef = useRef<HTMLInputElement>(null);
   const contentLinkRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
-  const { addCampaign } = useCampaigns();
   
   const [wizardState, setWizardState] = useState<WizardState>(() => {
-    const defaultState: WizardState = {
+    // Load from localStorage
+    const saved = localStorage.getItem("campaignWizardState");
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch {
+        return {
+          creatorId: null,
+          creatorSummary: null,
+          objective: "awareness",
+          brief: "",
+          contentType: 'upload',
+          contentFilePreview: "",
+          contentLink: "",
+          budgetINR: 0,
+          audiencePreset: 'India',
+          platforms: [],
+        };
+      }
+    }
+    
+    // Check for URL parameter
+    const creatorIdParam = searchParams.get("creatorId");
+    if (creatorIdParam) {
+      const creatorId = parseInt(creatorIdParam);
+      const creator = creators.find(c => c.id === creatorId);
+      if (creator) {
+        return {
+          creatorId: creator.id,
+          creatorSummary: {
+            name: creator.name,
+            avatar: creator.avatar,
+            followers: creator.followers,
+            categories: creator.categories,
+          },
+          objective: "awareness",
+          brief: "",
+          contentType: 'upload',
+          contentFilePreview: "",
+          contentLink: "",
+          budgetINR: 0,
+          audiencePreset: 'India',
+          platforms: [],
+        };
+      }
+    }
+    
+    return {
       creatorId: null,
       creatorSummary: null,
       objective: "awareness",
@@ -82,38 +133,6 @@ export default function CreateCampaignWizardPage() {
       audiencePreset: 'India',
       platforms: [],
     };
-
-    // Load from localStorage and merge with defaults
-    const saved = localStorage.getItem("campaignWizardState");
-    if (saved) {
-      try {
-        const parsed = JSON.parse(saved);
-        return { ...defaultState, ...parsed };
-      } catch {
-        return defaultState;
-      }
-    }
-    
-    // Check for URL parameter
-    const creatorIdParam = searchParams.get("creatorId");
-    if (creatorIdParam) {
-      const creatorId = parseInt(creatorIdParam);
-      const creator = creators.find(c => c.id === creatorId);
-      if (creator) {
-        return {
-          ...defaultState,
-          creatorId: creator.id,
-          creatorSummary: {
-            name: creator.name,
-            avatar: creator.avatar,
-            followers: creator.followers,
-            categories: creator.categories,
-          },
-        };
-      }
-    }
-    
-    return defaultState;
   });
 
   // Persist to localStorage
@@ -161,76 +180,23 @@ export default function CreateCampaignWizardPage() {
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (!file) return;
-    
-    // Validate file
-    const validation = validateContentFile(file);
-    if (!validation.isValid) {
-      toast({
-        title: "Invalid File",
-        description: validation.error,
-        variant: "destructive",
+    if (file) {
+      const url = URL.createObjectURL(file);
+      setWizardState({ 
+        ...wizardState, 
+        contentFilePreview: file.type.startsWith('image/') || file.type.startsWith('video/') 
+          ? url 
+          : file.name 
       });
-      return;
     }
-
-    // Sanitize filename
-    const sanitizedFile = new File([file], sanitizeFilename(file.name), {
-      type: file.type,
-    });
-
-    // Create safe preview URL
-    const url = createSafePreviewUrl(sanitizedFile);
-    if (!url) {
-      toast({
-        title: "Error",
-        description: "Failed to create file preview.",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    setWizardState({ 
-      ...wizardState, 
-      contentFilePreview: file.type.startsWith('image/') || file.type.startsWith('video/') 
-        ? url 
-        : sanitizedFile.name 
-    });
-    
-    toast({
-      title: "File Uploaded",
-      description: "Content file uploaded successfully.",
-    });
   };
 
   const handleLaunchCampaign = () => {
-    if (!wizardState.creatorSummary) return;
-
-    const campaignId = addCampaign({
-      creator: {
-        id: String(wizardState.creatorId || 0),
-        name: wizardState.creatorSummary.name,
-        avatar: wizardState.creatorSummary.avatar,
-        handle: `@${wizardState.creatorSummary.name.toLowerCase().replace(/\s+/g, '')}`,
-      },
-      objective: wizardState.objective,
-      brief: wizardState.brief,
-      contentType: wizardState.contentType,
-      contentRef: wizardState.contentType === 'upload' ? wizardState.contentFilePreview : wizardState.contentLink,
-      budgetINR: wizardState.budgetINR,
-      audiencePreset: wizardState.audiencePreset,
-      platforms: wizardState.platforms,
-    });
-
-    // Reset wizard state
-    localStorage.removeItem("campaignWizardState");
-    
+    console.log("Campaign state:", wizardState);
     toast({
-      title: "Campaign launched",
-      description: "Your campaign is now active.",
+      title: "Campaign Captured",
+      description: "No backend yet — check console for full state",
     });
-
-    navigate(`/campaigns/${campaignId}`);
   };
 
   const handleBack = () => {

@@ -9,13 +9,10 @@ import { Badge } from "@/components/ui/badge";
 import { Upload, FileText, Camera, Shield, CheckCircle, AlertCircle, Eye } from "lucide-react";
 import { Link, useSearchParams } from "react-router-dom";
 import Navigation from "@/components/Navigation";
-import { useToast } from "@/hooks/use-toast";
-import { validateImageFile, sanitizeFilename } from "@/lib/file-validation";
 
 const DocumentVerification = () => {
   const [searchParams] = useSearchParams();
   const userType = searchParams.get('type') || 'influencer';
-  const { toast } = useToast();
   
   const [verificationData, setVerificationData] = useState({
     documentType: "",
@@ -32,35 +29,14 @@ const DocumentVerification = () => {
   const [currentStep, setCurrentStep] = useState(1);
 
   const handleFileUpload = (type: 'front' | 'back' | 'selfie', file: File) => {
-    // Validate file
-    const validation = validateImageFile(file);
-    if (!validation.isValid) {
-      toast({
-        title: "Invalid File",
-        description: validation.error,
-        variant: "destructive",
-      });
-      return;
-    }
-
-    // Sanitize filename
-    const sanitizedFile = new File([file], sanitizeFilename(file.name), {
-      type: file.type,
-    });
-
     setVerificationData(prev => ({
       ...prev,
-      [`${type}Image`]: sanitizedFile
+      [`${type}Image`]: file
     }));
     setUploadStatus(prev => ({
       ...prev,
       [type]: 'uploaded'
     }));
-    
-    toast({
-      title: "File Uploaded",
-      description: `${type.charAt(0).toUpperCase() + type.slice(1)} image uploaded successfully.`,
-    });
   };
 
   const renderFileUploadCard = (
