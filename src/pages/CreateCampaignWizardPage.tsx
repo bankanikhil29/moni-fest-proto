@@ -12,6 +12,7 @@ import { useState, useEffect, useRef } from "react";
 import { useSearchParams } from "react-router-dom";
 import { creators, Creator } from "@/data/creators";
 import { Star, Instagram, MapPin, CheckCircle, X, ChevronLeft, ChevronRight } from "lucide-react";
+import { campaignBriefSchema } from "@/lib/validation";
 
 const steps = [
   { id: 1, name: "Creator" },
@@ -116,9 +117,8 @@ export default function CreateCampaignWizardPage() {
   };
 
   const isStep1Valid = wizardState.creatorId !== null;
-  const isStep2Valid = 
-    wizardState.objective && 
-    wizardState.brief.length >= BRIEF_MIN_LENGTH;
+  const briefValidation = campaignBriefSchema.safeParse(wizardState.brief);
+  const isStep2Valid = wizardState.objective && briefValidation.success;
 
   const handleNext = () => {
     if (currentStep === 1 && !isStep1Valid) return;
@@ -325,7 +325,7 @@ export default function CreateCampaignWizardPage() {
                     <span
                       className={cn(
                         "text-sm font-medium",
-                        wizardState.brief.length < BRIEF_MIN_LENGTH
+                        !briefValidation.success
                           ? "text-destructive"
                           : "text-muted-foreground"
                       )}
@@ -333,9 +333,9 @@ export default function CreateCampaignWizardPage() {
                       {wizardState.brief.length} / {BRIEF_MIN_LENGTH}
                     </span>
                   </div>
-                  {wizardState.brief.length > 0 && wizardState.brief.length < BRIEF_MIN_LENGTH && (
+                  {!briefValidation.success && wizardState.brief.length > 0 && (
                     <p className="text-sm text-destructive">
-                      Brief must be at least {BRIEF_MIN_LENGTH} characters
+                      {briefValidation.error.errors[0]?.message}
                     </p>
                   )}
                 </div>

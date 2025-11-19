@@ -9,6 +9,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Badge } from "@/components/ui/badge";
 import { X, Plus, Upload, User, Instagram, Youtube, Twitter, Camera, MapPin, Users, TrendingUp } from "lucide-react";
 import Navigation from "@/components/Navigation";
+import { influencerProfileSchema } from "@/lib/validation";
 
 const InfluencerProfileSetup = () => {
   const [formData, setFormData] = useState({
@@ -47,6 +48,7 @@ const InfluencerProfileSetup = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [selectedNiches, setSelectedNiches] = useState<string[]>([]);
   const [selectedContentTypes, setSelectedContentTypes] = useState<string[]>([]);
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   const niches = [
     "Fashion & Beauty", "Food & Travel", "Technology", "Fitness & Health",
@@ -88,6 +90,26 @@ const InfluencerProfileSetup = () => {
   };
 
   const nextStep = () => {
+    // Validate on step 1 (personal info)
+    if (currentStep === 1) {
+      const stepData = {
+        personalInfo: formData.personalInfo,
+        socialMedia: formData.socialMedia,
+        contentDetails: { ...formData.contentDetails, niches: selectedNiches, contentTypes: selectedContentTypes },
+        rates: formData.rates
+      };
+      const result = influencerProfileSchema.safeParse(stepData);
+      if (!result.success) {
+        const newErrors: Record<string, string> = {};
+        result.error.errors.forEach(err => {
+          const path = err.path.join('.');
+          newErrors[path] = err.message;
+        });
+        setErrors(newErrors);
+        return;
+      }
+      setErrors({});
+    }
     setCurrentStep(prev => Math.min(prev + 1, 4));
   };
 
@@ -117,6 +139,9 @@ const InfluencerProfileSetup = () => {
             placeholder="Enter your full name"
             className="mt-1"
           />
+          {errors['personalInfo.fullName'] && (
+            <p className="text-sm text-destructive mt-1">{errors['personalInfo.fullName']}</p>
+          )}
         </div>
 
         <div>
@@ -132,6 +157,9 @@ const InfluencerProfileSetup = () => {
             placeholder="your.email@example.com"
             className="mt-1"
           />
+          {errors['personalInfo.email'] && (
+            <p className="text-sm text-destructive mt-1">{errors['personalInfo.email']}</p>
+          )}
         </div>
 
         <div>
@@ -146,6 +174,9 @@ const InfluencerProfileSetup = () => {
             placeholder="+91 98765 43210"
             className="mt-1"
           />
+          {errors['personalInfo.phone'] && (
+            <p className="text-sm text-destructive mt-1">{errors['personalInfo.phone']}</p>
+          )}
         </div>
 
         <div>
@@ -269,6 +300,9 @@ const InfluencerProfileSetup = () => {
               placeholder="@yourusername"
               className="mt-1"
             />
+            {errors['socialMedia.instagram.handle'] && (
+              <p className="text-sm text-destructive mt-1">{errors['socialMedia.instagram.handle']}</p>
+            )}
           </div>
           <div>
             <Label htmlFor="instagramFollowers">Followers Count *</Label>
@@ -286,6 +320,9 @@ const InfluencerProfileSetup = () => {
               placeholder="10000"
               className="mt-1"
             />
+            {errors['socialMedia.instagram.followers'] && (
+              <p className="text-sm text-destructive mt-1">{errors['socialMedia.instagram.followers']}</p>
+            )}
           </div>
           <div>
             <Label htmlFor="instagramEngagement">Engagement Rate (%)</Label>
@@ -772,6 +809,24 @@ const InfluencerProfileSetup = () => {
             ) : (
               <Button
                 onClick={() => {
+                  // Final validation before submission
+                  const stepData = {
+                    personalInfo: formData.personalInfo,
+                    socialMedia: formData.socialMedia,
+                    contentDetails: { ...formData.contentDetails, niches: selectedNiches, contentTypes: selectedContentTypes },
+                    rates: formData.rates
+                  };
+                  const result = influencerProfileSchema.safeParse(stepData);
+                  if (!result.success) {
+                    const newErrors: Record<string, string> = {};
+                    result.error.errors.forEach(err => {
+                      const path = err.path.join('.');
+                      newErrors[path] = err.message;
+                    });
+                    setErrors(newErrors);
+                    setCurrentStep(1); // Go back to first step with errors
+                    return;
+                  }
                   // Handle form submission
                   console.log("Form submitted:", formData);
                   // Redirect to verification
