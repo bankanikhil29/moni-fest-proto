@@ -8,6 +8,8 @@ import { ArrowLeft, CreditCard, Shield, Lock, CheckCircle, AlertCircle, Calendar
 import Navigation from "@/components/Navigation";
 import { useParams, useSearchParams } from "react-router-dom";
 import { useState } from "react";
+import { creatorIdParamSchema, amountParamSchema, paymentCardSchema } from "@/lib/validation-schemas";
+import { toast } from "sonner";
 
 const creatorData = {
   1: {
@@ -20,9 +22,17 @@ const creatorData = {
 export default function PaymentPage() {
   const { id } = useParams();
   const [searchParams] = useSearchParams();
-  const creator = creatorData[Number(id) as keyof typeof creatorData];
-  const amount = searchParams.get('amount') || '0';
-  const services = searchParams.get('services')?.split(',') || [];
+  
+  // Validate URL parameters
+  const parsedId = creatorIdParamSchema.safeParse(id);
+  const creatorId = parsedId.success ? parsedId.data : null;
+  const creator = creatorId ? creatorData[creatorId as keyof typeof creatorData] : null;
+  
+  const amountParam = searchParams.get('amount') || '0';
+  const parsedAmount = amountParamSchema.safeParse(amountParam);
+  const amount = parsedAmount.success ? parsedAmount.data.toString() : '0';
+  
+  const services = searchParams.get('services')?.split(',').filter(s => s.trim().length > 0) || [];
   
   const [paymentMethod, setPaymentMethod] = useState('card');
   const [cardDetails, setCardDetails] = useState({
@@ -33,13 +43,34 @@ export default function PaymentPage() {
     country: '',
     zip: ''
   });
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   if (!creator) {
     return <div>Creator not found</div>;
   }
 
   const handlePayment = () => {
+    // Validate card details if paying by card
+    if (paymentMethod === 'card') {
+      const result = paymentCardSchema.safeParse(cardDetails);
+      
+      if (!result.success) {
+        const fieldErrors: Record<string, string> = {};
+        result.error.errors.forEach(err => {
+          if (err.path[0]) {
+            fieldErrors[err.path[0] as string] = err.message;
+          }
+        });
+        setErrors(fieldErrors);
+        toast.error("Please fix the errors in the form");
+        return;
+      }
+      
+      setErrors({});
+    }
+    
     // Simulate payment processing
+    toast.success("Processing payment...");
     setTimeout(() => {
       window.location.href = `/payment-success/${id}`;
     }, 2000);
@@ -125,7 +156,9 @@ export default function PaymentPage() {
                               placeholder="1234 5678 9012 3456"
                               value={cardDetails.number}
                               onChange={(e) => setCardDetails(prev => ({ ...prev, number: e.target.value }))}
+                              aria-invalid={!!errors.number}
                             />
+                            {errors.number && <p className="text-sm text-destructive mt-1">{errors.number}</p>}
                           </div>
                           
                           <div className="grid grid-cols-2 gap-4">
@@ -136,7 +169,9 @@ export default function PaymentPage() {
                                 placeholder="MM/YY"
                                 value={cardDetails.expiry}
                                 onChange={(e) => setCardDetails(prev => ({ ...prev, expiry: e.target.value }))}
+                                aria-invalid={!!errors.expiry}
                               />
+                              {errors.expiry && <p className="text-sm text-destructive mt-1">{errors.expiry}</p>}
                             </div>
                             <div>
                               <Label htmlFor="cvc">CVC</Label>
@@ -145,7 +180,9 @@ export default function PaymentPage() {
                                 placeholder="123"
                                 value={cardDetails.cvc}
                                 onChange={(e) => setCardDetails(prev => ({ ...prev, cvc: e.target.value }))}
+                                aria-invalid={!!errors.cvc}
                               />
+                              {errors.cvc && <p className="text-sm text-destructive mt-1">{errors.cvc}</p>}
                             </div>
                           </div>
 
@@ -156,7 +193,9 @@ export default function PaymentPage() {
                               placeholder="John Doe"
                               value={cardDetails.name}
                               onChange={(e) => setCardDetails(prev => ({ ...prev, name: e.target.value }))}
+                              aria-invalid={!!errors.name}
                             />
+                            {errors.name && <p className="text-sm text-destructive mt-1">{errors.name}</p>}
                           </div>
 
                           <div className="grid grid-cols-2 gap-4">
