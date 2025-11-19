@@ -216,9 +216,9 @@ export default function FindCreators() {
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredCreators.map((creator) => (
-                <div key={creator.id} className="relative group">
-                  <Card className="card-soft hover:shadow-lg transition-all duration-300 cursor-pointer">
-                    <CardContent className="p-6">
+                <div key={creator.id} className="group" tabIndex={0}>
+                  <Card className="card-soft transition-transform duration-200 ease-out hover:scale-[1.02] hover:shadow-lg focus-within:scale-[1.02] focus-within:shadow-lg cursor-pointer">
+                    <CardContent className="p-6 relative">
                       <div className="flex items-center gap-4 mb-4">
                         <img
                           src={creator.avatar}
@@ -301,24 +301,36 @@ export default function FindCreators() {
                           <Button 
                             size="sm"
                             variant="outline"
-                            onClick={() => window.location.href = `/creator-profile/${creator.id}`}
+                            onClick={() => {
+                              const portfolioUrl = creator.portfolio?.[0];
+                              if (portfolioUrl) {
+                                window.open(portfolioUrl, '_blank', 'noopener,noreferrer');
+                              } else {
+                                window.location.href = `/creator-profile/${creator.id}`;
+                              }
+                            }}
                           >
                             Portfolio
                           </Button>
                         </div>
                       </div>
+
+                      {/* Bottom Book Creator CTA - visible on mobile, hover-only on desktop */}
+                      <div className="flex sm:hidden group-hover:flex group-focus-within:flex mt-4 pt-4 border-t border-border relative z-[2] pointer-events-auto">
+                        <Button 
+                          size="sm"
+                          className="w-full"
+                          onClick={() => {
+                            console.log('Booking coming soon for', creator.name);
+                            alert('Booking functionality coming soon!');
+                          }}
+                          aria-label={`Book creator: ${creator.name}`}
+                        >
+                          Book Creator
+                        </Button>
+                      </div>
                     </CardContent>
                   </Card>
-
-                  <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center pointer-events-none">
-                    <Button 
-                      size="lg"
-                      className="pointer-events-auto"
-                      onClick={() => window.location.href = `/creator-booking/${creator.id}`}
-                    >
-                      Book Creator
-                    </Button>
-                  </div>
                 </div>
               ))}
             </div>
