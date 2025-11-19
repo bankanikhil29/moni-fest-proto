@@ -10,8 +10,7 @@ export default function Hero() {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
         <div className="text-center lg:text-left">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-white">
-              Manifest Your <span className="text-white font-extrabold">Influencer</span> &
-              <span className="text-white font-extrabold">Brand Deals</span> Into Reality
+              Manifest Your <span className="text-white font-extrabold">Influencer</span> & <span className="text-white font-extrabold">Brand Deals</span> Into Reality
             </h1>
             <p className="text-xl text-white/90 mb-8 max-w-2xl text-center lg:text-left">
               Brands discover, creators deliver — payments guaranteed through secure escrow.
