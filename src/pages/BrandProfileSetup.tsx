@@ -9,6 +9,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Badge } from "@/components/ui/badge";
 import { X, Building, Target, Users, Zap, Globe, IndianRupee } from "lucide-react";
 import Navigation from "@/components/Navigation";
+import { emailSchema, phoneINSchema, nameSchema } from "@/lib/validation";
 
 const BrandProfileSetup = () => {
   const [formData, setFormData] = useState({
@@ -55,6 +56,7 @@ const BrandProfileSetup = () => {
   const [selectedCampaignTypes, setSelectedCampaignTypes] = useState<string[]>([]);
   const [selectedContentTypes, setSelectedContentTypes] = useState<string[]>([]);
   const [selectedNiches, setSelectedNiches] = useState<string[]>([]);
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   const industries = [
     "Technology & Software", "E-commerce & Retail", "Food & Beverage", "Fashion & Beauty",
@@ -122,6 +124,33 @@ const BrandProfileSetup = () => {
   };
 
   const nextStep = () => {
+    // Lightweight validation on step 2 (contact info)
+    if (currentStep === 2) {
+      const newErrors: Record<string, string> = {};
+      
+      const emailResult = emailSchema.safeParse(formData.contactInfo.email);
+      if (!emailResult.success) {
+        newErrors['contactInfo.email'] = emailResult.error.errors[0]?.message || 'Invalid email';
+      }
+      
+      if (formData.contactInfo.phone) {
+        const phoneResult = phoneINSchema.safeParse(formData.contactInfo.phone);
+        if (!phoneResult.success) {
+          newErrors['contactInfo.phone'] = phoneResult.error.errors[0]?.message || 'Invalid phone';
+        }
+      }
+      
+      const nameResult = nameSchema.safeParse(formData.contactInfo.contactPersonName);
+      if (!nameResult.success) {
+        newErrors['contactInfo.contactPersonName'] = nameResult.error.errors[0]?.message || 'Required';
+      }
+      
+      if (Object.keys(newErrors).length > 0) {
+        setErrors(newErrors);
+        return;
+      }
+      setErrors({});
+    }
     setCurrentStep(prev => Math.min(prev + 1, 4));
   };
 
@@ -281,6 +310,9 @@ const BrandProfileSetup = () => {
             placeholder="Full name of the main contact"
             className="mt-1"
           />
+          {errors['contactInfo.contactPersonName'] && (
+            <p className="text-sm text-destructive mt-1">{errors['contactInfo.contactPersonName']}</p>
+          )}
         </div>
 
         <div>
@@ -310,6 +342,9 @@ const BrandProfileSetup = () => {
             placeholder="contact@yourcompany.com"
             className="mt-1"
           />
+          {errors['contactInfo.email'] && (
+            <p className="text-sm text-destructive mt-1">{errors['contactInfo.email']}</p>
+          )}
         </div>
 
         <div>
@@ -324,6 +359,9 @@ const BrandProfileSetup = () => {
             placeholder="+91 98765 43210"
             className="mt-1"
           />
+          {errors['contactInfo.phone'] && (
+            <p className="text-sm text-destructive mt-1">{errors['contactInfo.phone']}</p>
+          )}
         </div>
 
         <div>

@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { Upload, FileText, Camera, Shield, CheckCircle, AlertCircle, Eye } from "lucide-react";
 import { Link, useSearchParams } from "react-router-dom";
 import Navigation from "@/components/Navigation";
+import { documentVerificationSchema, validateFile } from "@/lib/validation";
 
 const DocumentVerification = () => {
   const [searchParams] = useSearchParams();
@@ -27,8 +28,20 @@ const DocumentVerification = () => {
 
   const [uploadStatus, setUploadStatus] = useState<{[key: string]: string}>({});
   const [currentStep, setCurrentStep] = useState(1);
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   const handleFileUpload = (type: 'front' | 'back' | 'selfie', file: File) => {
+    const validation = validateFile(file, {
+      maxMB: 5,
+      accept: ['image/jpeg', 'image/png', 'image/webp', 'image/jpg']
+    });
+    
+    if (!validation.ok) {
+      setErrors(prev => ({ ...prev, [`${type}Image`]: validation.error || 'Invalid file' }));
+      return;
+    }
+    
+    setErrors(prev => ({ ...prev, [`${type}Image`]: '' }));
     setVerificationData(prev => ({
       ...prev,
       [`${type}Image`]: file
@@ -52,6 +65,10 @@ const DocumentVerification = () => {
         </div>
         <h3 className="font-semibold mb-2">{title}</h3>
         <p className="text-sm text-muted-foreground mb-4">{description}</p>
+        
+        {errors[`${type}Image`] && (
+          <p className="text-sm text-destructive mb-2">{errors[`${type}Image`]}</p>
+        )}
         
         {uploadStatus[type] === 'uploaded' ? (
           <div className="flex items-center justify-center gap-2 text-green-600">
@@ -127,6 +144,9 @@ const DocumentVerification = () => {
           }
           className="mt-1"
         />
+        {errors.documentNumber && (
+          <p className="text-sm text-destructive mt-1">{errors.documentNumber}</p>
+        )}
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -142,6 +162,9 @@ const DocumentVerification = () => {
             placeholder="Full name"
             className="mt-1"
           />
+          {errors.fullName && (
+            <p className="text-sm text-destructive mt-1">{errors.fullName}</p>
+          )}
         </div>
 
         <div>
@@ -156,6 +179,9 @@ const DocumentVerification = () => {
             }))}
             className="mt-1"
           />
+          {errors.dateOfBirth && (
+            <p className="text-sm text-destructive mt-1">{errors.dateOfBirth}</p>
+          )}
         </div>
       </div>
 
@@ -226,6 +252,18 @@ const DocumentVerification = () => {
   );
 
   const nextStep = () => {
+    if (currentStep === 1) {
+      const result = documentVerificationSchema.safeParse(verificationData);
+      if (!result.success) {
+        const newErrors: Record<string, string> = {};
+        result.error.errors.forEach(err => {
+          newErrors[err.path[0] as string] = err.message;
+        });
+        setErrors(newErrors);
+        return;
+      }
+      setErrors({});
+    }
     setCurrentStep(prev => Math.min(prev + 1, 3));
   };
 
