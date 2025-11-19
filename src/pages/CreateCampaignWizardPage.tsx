@@ -14,6 +14,7 @@ import { creators, Creator } from "@/data/creators";
 import { Star, Instagram, MapPin, CheckCircle, X, ChevronLeft, ChevronRight, Upload, Link as LinkIcon, IndianRupee, Target, Users } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useCampaigns } from "@/contexts/CampaignStore";
+import { validateContentFile, sanitizeFilename, createSafePreviewUrl } from "@/lib/file-validation";
 
 const steps = [
   { id: 1, name: "Creator" },
@@ -160,15 +161,46 @@ export default function CreateCampaignWizardPage() {
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) {
-      const url = URL.createObjectURL(file);
-      setWizardState({ 
-        ...wizardState, 
-        contentFilePreview: file.type.startsWith('image/') || file.type.startsWith('video/') 
-          ? url 
-          : file.name 
+    if (!file) return;
+    
+    // Validate file
+    const validation = validateContentFile(file);
+    if (!validation.isValid) {
+      toast({
+        title: "Invalid File",
+        description: validation.error,
+        variant: "destructive",
       });
+      return;
     }
+
+    // Sanitize filename
+    const sanitizedFile = new File([file], sanitizeFilename(file.name), {
+      type: file.type,
+    });
+
+    // Create safe preview URL
+    const url = createSafePreviewUrl(sanitizedFile);
+    if (!url) {
+      toast({
+        title: "Error",
+        description: "Failed to create file preview.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setWizardState({ 
+      ...wizardState, 
+      contentFilePreview: file.type.startsWith('image/') || file.type.startsWith('video/') 
+        ? url 
+        : sanitizedFile.name 
+    });
+    
+    toast({
+      title: "File Uploaded",
+      description: "Content file uploaded successfully.",
+    });
   };
 
   const handleLaunchCampaign = () => {
