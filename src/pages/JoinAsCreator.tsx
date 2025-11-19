@@ -7,8 +7,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Checkbox } from "@/components/ui/checkbox";
 import Navigation from "@/components/Navigation";
 import { useState } from "react";
-import { creatorApplicationSchema } from "@/lib/validation-schemas";
-import { toast } from "sonner";
 
 export default function JoinAsCreator() {
   const [formData, setFormData] = useState({
@@ -19,7 +17,7 @@ export default function JoinAsCreator() {
     tiktokHandle: "",
     youtubeChannel: "",
     followersCount: "",
-    contentCategories: [] as string[],
+    contentCategories: [],
     bio: "",
     portfolioLinks: "",
     ratePerReel: "",
@@ -27,42 +25,10 @@ export default function JoinAsCreator() {
     location: ""
   });
 
-  const [errors, setErrors] = useState<Record<string, string>>({});
-
   const categories = [
     "Fashion", "Beauty", "Lifestyle", "Food", "Travel", "Tech", "Gaming", 
     "Fitness", "Health", "Business", "Education", "Entertainment"
   ];
-
-  const handleCategoryToggle = (category: string) => {
-    setFormData(prev => ({
-      ...prev,
-      contentCategories: prev.contentCategories.includes(category)
-        ? prev.contentCategories.filter(c => c !== category)
-        : [...prev.contentCategories, category]
-    }));
-  };
-
-  const handleSubmit = () => {
-    // Validate form data
-    const result = creatorApplicationSchema.safeParse(formData);
-    
-    if (!result.success) {
-      const fieldErrors: Record<string, string> = {};
-      result.error.errors.forEach(err => {
-        if (err.path[0]) {
-          fieldErrors[err.path[0] as string] = err.message;
-        }
-      });
-      setErrors(fieldErrors);
-      toast.error("Please fix the errors in the form");
-      return;
-    }
-
-    setErrors({});
-    console.log("Form submitted:", formData);
-    toast.success("Application submitted successfully!");
-  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -92,9 +58,7 @@ export default function JoinAsCreator() {
                       placeholder="Enter your full name"
                       value={formData.fullName}
                       onChange={(e) => setFormData({...formData, fullName: e.target.value})}
-                      aria-invalid={!!errors.fullName}
                     />
-                    {errors.fullName && <p className="text-sm text-destructive mt-1">{errors.fullName}</p>}
                   </div>
                   <div>
                     <Label htmlFor="email">Email Address *</Label>
@@ -104,9 +68,7 @@ export default function JoinAsCreator() {
                       placeholder="your@email.com"
                       value={formData.email}
                       onChange={(e) => setFormData({...formData, email: e.target.value})}
-                      aria-invalid={!!errors.email}
                     />
-                    {errors.email && <p className="text-sm text-destructive mt-1">{errors.email}</p>}
                   </div>
                 </div>
 
@@ -187,29 +149,22 @@ export default function JoinAsCreator() {
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-2">
                     {categories.map((category) => (
                       <div key={category} className="flex items-center space-x-2">
-                        <Checkbox 
-                          id={category}
-                          checked={formData.contentCategories.includes(category)}
-                          onCheckedChange={() => handleCategoryToggle(category)}
-                        />
+                        <Checkbox id={category} />
                         <Label htmlFor={category} className="text-sm">{category}</Label>
                       </div>
                     ))}
                   </div>
-                  {errors.contentCategories && <p className="text-sm text-destructive mt-1">{errors.contentCategories}</p>}
                 </div>
 
                 <div>
-                  <Label htmlFor="bio">Bio & Experience *</Label>
+                  <Label htmlFor="bio">Bio & Experience</Label>
                   <Textarea 
                     id="bio" 
                     placeholder="Tell us about yourself, your content style, and experience with brand collaborations..."
                     rows={4}
                     value={formData.bio}
                     onChange={(e) => setFormData({...formData, bio: e.target.value})}
-                    aria-invalid={!!errors.bio}
                   />
-                  {errors.bio && <p className="text-sm text-destructive mt-1">{errors.bio}</p>}
                 </div>
 
                 <div>
@@ -254,7 +209,7 @@ export default function JoinAsCreator() {
                   </Label>
                 </div>
 
-                <Button className="w-full" variant="coral" size="lg" onClick={handleSubmit}>
+                <Button className="w-full" variant="coral" size="lg">
                   Submit Application
                 </Button>
               </CardContent>

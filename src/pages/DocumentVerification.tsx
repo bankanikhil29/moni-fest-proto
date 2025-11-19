@@ -12,8 +12,7 @@ import Navigation from "@/components/Navigation";
 
 const DocumentVerification = () => {
   const [searchParams] = useSearchParams();
-  const userTypeParam = searchParams.get('type');
-  const userType = (userTypeParam === 'brand' || userTypeParam === 'influencer') ? userTypeParam : 'influencer';
+  const userType = searchParams.get('type') || 'influencer';
   
   const [verificationData, setVerificationData] = useState({
     documentType: "",

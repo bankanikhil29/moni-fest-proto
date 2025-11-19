@@ -11,9 +11,7 @@ import { cn } from "@/lib/utils";
 import { useState, useEffect, useRef } from "react";
 import { useSearchParams } from "react-router-dom";
 import { creators, Creator } from "@/data/creators";
-import { Star, Instagram, MapPin, CheckCircle, X, ChevronLeft, ChevronRight, Upload, Link as LinkIcon, IndianRupee, Target, Users } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
-import { creatorIdParamSchema } from "@/lib/validation-schemas";
+import { Star, Instagram, MapPin, CheckCircle, X, ChevronLeft, ChevronRight } from "lucide-react";
 
 const steps = [
   { id: 1, name: "Creator" },
@@ -34,12 +32,6 @@ interface WizardState {
   } | null;
   objective: string;
   brief: string;
-  contentType: 'upload' | 'link';
-  contentFilePreview: string;
-  contentLink: string;
-  budgetINR: number;
-  audiencePreset: 'India' | 'Metros' | 'Custom (coming soon)';
-  platforms: string[];
 }
 
 const OBJECTIVES = [
@@ -51,28 +43,11 @@ const OBJECTIVES = [
 ];
 
 const BRIEF_MIN_LENGTH = 120;
-const PLATFORM_OPTIONS = [
-  "Instagram Reels",
-  "Instagram Posts", 
-  "LinkedIn UGC",
-  "YouTube Shorts"
-];
-
-const formatINR = (value: number): string => {
-  return new Intl.NumberFormat('en-IN', {
-    style: 'currency',
-    currency: 'INR',
-    maximumFractionDigits: 0,
-  }).format(value);
-};
 
 export default function CreateCampaignWizardPage() {
   const [searchParams] = useSearchParams();
   const [currentStep, setCurrentStep] = useState(1);
   const creatorGridRef = useRef<HTMLDivElement>(null);
-  const contentUploadRef = useRef<HTMLInputElement>(null);
-  const contentLinkRef = useRef<HTMLInputElement>(null);
-  const { toast } = useToast();
   
   const [wizardState, setWizardState] = useState<WizardState>(() => {
     // Load from localStorage
@@ -86,42 +61,27 @@ export default function CreateCampaignWizardPage() {
           creatorSummary: null,
           objective: "awareness",
           brief: "",
-          contentType: 'upload',
-          contentFilePreview: "",
-          contentLink: "",
-          budgetINR: 0,
-          audiencePreset: 'India',
-          platforms: [],
         };
       }
     }
     
-    // Check for URL parameter with validation
+    // Check for URL parameter
     const creatorIdParam = searchParams.get("creatorId");
     if (creatorIdParam) {
-      const parsed = creatorIdParamSchema.safeParse(creatorIdParam);
-      if (parsed.success) {
-        const creatorId = parsed.data;
-        const creator = creators.find(c => c.id === creatorId);
-        if (creator) {
-          return {
-            creatorId: creator.id,
-            creatorSummary: {
-              name: creator.name,
-              avatar: creator.avatar,
-              followers: creator.followers,
-              categories: creator.categories,
-            },
-            objective: "awareness",
-            brief: "",
-            contentType: 'upload',
-            contentFilePreview: "",
-            contentLink: "",
-            budgetINR: 0,
-            audiencePreset: 'India',
-            platforms: [],
-          };
-        }
+      const creatorId = parseInt(creatorIdParam);
+      const creator = creators.find(c => c.id === creatorId);
+      if (creator) {
+        return {
+          creatorId: creator.id,
+          creatorSummary: {
+            name: creator.name,
+            avatar: creator.avatar,
+            followers: creator.followers,
+            categories: creator.categories,
+          },
+          objective: "awareness",
+          brief: "",
+        };
       }
     }
     
@@ -130,12 +90,6 @@ export default function CreateCampaignWizardPage() {
       creatorSummary: null,
       objective: "awareness",
       brief: "",
-      contentType: 'upload',
-      contentFilePreview: "",
-      contentLink: "",
-      budgetINR: 0,
-      audiencePreset: 'India',
-      platforms: [],
     };
   });
 
@@ -165,42 +119,13 @@ export default function CreateCampaignWizardPage() {
   const isStep2Valid = 
     wizardState.objective && 
     wizardState.brief.length >= BRIEF_MIN_LENGTH;
-  const isStep3Valid = 
-    (wizardState.contentType === 'upload' && wizardState.contentFilePreview) ||
-    (wizardState.contentType === 'link' && wizardState.contentLink.trim().length > 0);
-  const isStep4Valid = wizardState.budgetINR >= 1000;
-  const isStep5Valid = wizardState.platforms.length > 0;
 
   const handleNext = () => {
     if (currentStep === 1 && !isStep1Valid) return;
     if (currentStep === 2 && !isStep2Valid) return;
-    if (currentStep === 3 && !isStep3Valid) return;
-    if (currentStep === 4 && !isStep4Valid) return;
-    if (currentStep === 5 && !isStep5Valid) return;
     if (currentStep < steps.length) {
       setCurrentStep(currentStep + 1);
     }
-  };
-
-  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const url = URL.createObjectURL(file);
-      setWizardState({ 
-        ...wizardState, 
-        contentFilePreview: file.type.startsWith('image/') || file.type.startsWith('video/') 
-          ? url 
-          : file.name 
-      });
-    }
-  };
-
-  const handleLaunchCampaign = () => {
-    console.log("Campaign state:", wizardState);
-    toast({
-      title: "Campaign Captured",
-      description: "No backend yet — check console for full state",
-    });
   };
 
   const handleBack = () => {
@@ -419,409 +344,6 @@ export default function CreateCampaignWizardPage() {
           </div>
         );
 
-      case 3:
-        return (
-          <div className="max-w-2xl mx-auto space-y-6">
-            <div>
-              <h2 className="text-2xl font-bold text-foreground mb-2">Content Source</h2>
-              <p className="text-muted-foreground">Provide reference content for the campaign</p>
-            </div>
-
-            <Card>
-              <CardContent className="pt-6 space-y-6">
-                {/* Content Type Radio */}
-                <div className="space-y-3">
-                  <Label className="text-base font-semibold">Content Type *</Label>
-                  <div className="flex gap-4">
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setWizardState({ ...wizardState, contentType: 'upload', contentLink: '' });
-                        setTimeout(() => contentUploadRef.current?.focus(), 100);
-                      }}
-                      className={cn(
-                        "flex-1 p-4 rounded-lg border-2 transition-all text-left",
-                        wizardState.contentType === 'upload'
-                          ? "border-primary bg-primary/5"
-                          : "border-border hover:border-primary/50"
-                      )}
-                    >
-                      <div className="flex items-center gap-3">
-                        <Upload className="h-5 w-5" />
-                        <div>
-                          <div className="font-semibold">Upload</div>
-                          <div className="text-sm text-muted-foreground">Upload a file</div>
-                        </div>
-                      </div>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setWizardState({ ...wizardState, contentType: 'link', contentFilePreview: '' });
-                        setTimeout(() => contentLinkRef.current?.focus(), 100);
-                      }}
-                      className={cn(
-                        "flex-1 p-4 rounded-lg border-2 transition-all text-left",
-                        wizardState.contentType === 'link'
-                          ? "border-primary bg-primary/5"
-                          : "border-border hover:border-primary/50"
-                      )}
-                    >
-                      <div className="flex items-center gap-3">
-                        <LinkIcon className="h-5 w-5" />
-                        <div>
-                          <div className="font-semibold">Link</div>
-                          <div className="text-sm text-muted-foreground">Link to existing UGC</div>
-                        </div>
-                      </div>
-                    </button>
-                  </div>
-                </div>
-
-                {/* Upload Input */}
-                {wizardState.contentType === 'upload' && (
-                  <div className="space-y-2">
-                    <Label htmlFor="content-file">Upload File</Label>
-                    <input
-                      ref={contentUploadRef}
-                      id="content-file"
-                      type="file"
-                      accept="image/*,video/*"
-                      onChange={handleFileUpload}
-                      className="block w-full text-sm text-muted-foreground file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-primary-foreground hover:file:bg-primary/90"
-                    />
-                    {wizardState.contentFilePreview && (
-                      <div className="mt-4 p-4 border rounded-lg bg-muted/30">
-                        {wizardState.contentFilePreview.startsWith('blob:') ? (
-                          <div className="flex items-center gap-3">
-                            <CheckCircle className="h-5 w-5 text-primary" />
-                            <span className="text-sm">Preview: {wizardState.contentFilePreview.substring(0, 50)}...</span>
-                          </div>
-                        ) : (
-                          <div className="flex items-center gap-3">
-                            <CheckCircle className="h-5 w-5 text-primary" />
-                            <span className="text-sm">{wizardState.contentFilePreview}</span>
-                          </div>
-                        )}
-                      </div>
-                    )}
-                    {!isStep3Valid && wizardState.contentType === 'upload' && (
-                      <p className="text-sm text-destructive" role="alert" aria-live="polite">
-                        Please add a file
-                      </p>
-                    )}
-                  </div>
-                )}
-
-                {/* Link Input */}
-                {wizardState.contentType === 'link' && (
-                  <div className="space-y-2">
-                    <Label htmlFor="content-link">Content Link</Label>
-                    <input
-                      ref={contentLinkRef}
-                      id="content-link"
-                      type="url"
-                      value={wizardState.contentLink}
-                      onChange={(e) => 
-                        setWizardState({ ...wizardState, contentLink: e.target.value })
-                      }
-                      placeholder="Paste a public URL to an existing post or asset"
-                      className={cn(
-                        "flex h-10 w-full rounded-md border bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50",
-                        !isStep3Valid && wizardState.contentType === 'link' ? "border-destructive" : "border-input"
-                      )}
-                      aria-invalid={!isStep3Valid && wizardState.contentType === 'link'}
-                    />
-                    <p className="text-sm text-muted-foreground">
-                      Paste a public URL to an existing post or asset
-                    </p>
-                    {!isStep3Valid && wizardState.contentType === 'link' && (
-                      <p className="text-sm text-destructive" role="alert" aria-live="polite">
-                        Please add a link
-                      </p>
-                    )}
-                  </div>
-                )}
-              </CardContent>
-            </Card>
-          </div>
-        );
-
-      case 4:
-        return (
-          <div className="max-w-2xl mx-auto space-y-6">
-            <div>
-              <h2 className="text-2xl font-bold text-foreground mb-2">Campaign Budget</h2>
-              <p className="text-muted-foreground">Set your budget for this campaign</p>
-            </div>
-
-            <Card>
-              <CardContent className="pt-6 space-y-6">
-                <div className="space-y-2">
-                  <Label htmlFor="budget" className="text-base font-semibold">
-                    Budget (INR) *
-                  </Label>
-                  <div className="relative">
-                    <IndianRupee className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                    <input
-                      id="budget"
-                      type="number"
-                      min="1000"
-                      step="100"
-                      value={wizardState.budgetINR || ''}
-                      onChange={(e) => 
-                        setWizardState({ ...wizardState, budgetINR: parseInt(e.target.value) || 0 })
-                      }
-                      placeholder="Enter amount"
-                      className={cn(
-                        "flex h-12 w-full rounded-md border bg-background pl-10 pr-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50",
-                        !isStep4Valid ? "border-destructive" : "border-input"
-                      )}
-                      aria-invalid={!isStep4Valid}
-                    />
-                  </div>
-                  {wizardState.budgetINR > 0 && (
-                    <p className="text-sm text-muted-foreground">
-                      Budget: {formatINR(wizardState.budgetINR)}
-                    </p>
-                  )}
-                  <p className="text-sm text-muted-foreground">
-                    Min ₹1,000 recommended
-                  </p>
-                  {!isStep4Valid && wizardState.budgetINR > 0 && (
-                    <p className="text-sm text-destructive" role="alert" aria-live="polite">
-                      Budget must be at least ₹1,000
-                    </p>
-                  )}
-                </div>
-
-                {/* Quick Presets */}
-                <div className="space-y-2">
-                  <Label className="text-sm font-medium">Quick Presets</Label>
-                  <div className="flex gap-3">
-                    {[1000, 5000, 10000].map((amount) => (
-                      <Button
-                        key={amount}
-                        type="button"
-                        variant="outline"
-                        size="sm"
-                        onClick={() => setWizardState({ ...wizardState, budgetINR: amount })}
-                        className={cn(
-                          wizardState.budgetINR === amount && "border-primary bg-primary/5"
-                        )}
-                      >
-                        {formatINR(amount)}
-                      </Button>
-                    ))}
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        );
-
-      case 5:
-        return (
-          <div className="max-w-2xl mx-auto space-y-6">
-            <div>
-              <h2 className="text-2xl font-bold text-foreground mb-2">Targeting</h2>
-              <p className="text-muted-foreground">Define your audience and platform preferences</p>
-            </div>
-
-            <Card>
-              <CardContent className="pt-6 space-y-6">
-                {/* Audience Preset */}
-                <div className="space-y-2">
-                  <Label htmlFor="audience" className="text-base font-semibold flex items-center gap-2">
-                    <Users className="h-4 w-4" />
-                    Audience
-                  </Label>
-                  <Select
-                    value={wizardState.audiencePreset}
-                    onValueChange={(value: any) => 
-                      setWizardState({ ...wizardState, audiencePreset: value })
-                    }
-                  >
-                    <SelectTrigger id="audience">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="India">India</SelectItem>
-                      <SelectItem value="Metros">Metros</SelectItem>
-                      <SelectItem value="Custom (coming soon)" disabled>
-                        Custom (coming soon)
-                      </SelectItem>
-                    </SelectContent>
-                  </Select>
-                  <p className="text-sm text-muted-foreground">
-                    Select your target audience region
-                  </p>
-                </div>
-
-                {/* Platforms */}
-                <div className="space-y-3">
-                  <Label className="text-base font-semibold flex items-center gap-2">
-                    <Target className="h-4 w-4" />
-                    Platforms *
-                  </Label>
-                  <div className="grid grid-cols-2 gap-3">
-                    {PLATFORM_OPTIONS.map((platform) => (
-                      <button
-                        key={platform}
-                        type="button"
-                        onClick={() => {
-                          const isSelected = wizardState.platforms.includes(platform);
-                          setWizardState({
-                            ...wizardState,
-                            platforms: isSelected
-                              ? wizardState.platforms.filter(p => p !== platform)
-                              : [...wizardState.platforms, platform]
-                          });
-                        }}
-                        className={cn(
-                          "p-3 rounded-lg border-2 text-sm font-medium transition-all text-left",
-                          wizardState.platforms.includes(platform)
-                            ? "border-primary bg-primary/5 text-primary"
-                            : "border-border hover:border-primary/50"
-                        )}
-                      >
-                        {platform}
-                      </button>
-                    ))}
-                  </div>
-                  {!isStep5Valid && (
-                    <p className="text-sm text-destructive" role="alert" aria-live="polite">
-                      Please select at least one platform
-                    </p>
-                  )}
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        );
-
-      case 6:
-        return (
-          <div className="max-w-3xl mx-auto space-y-6">
-            <div>
-              <h2 className="text-2xl font-bold text-foreground mb-2">Review Campaign</h2>
-              <p className="text-muted-foreground">Review your campaign details before launching</p>
-            </div>
-
-            <div className="space-y-4">
-              {/* Creator */}
-              {wizardState.creatorSummary && (
-                <Card>
-                  <CardContent className="pt-6">
-                    <h3 className="font-semibold text-lg mb-3">Creator</h3>
-                    <div className="flex items-center gap-3">
-                      <Avatar className="h-12 w-12">
-                        <AvatarImage src={wizardState.creatorSummary.avatar} alt={wizardState.creatorSummary.name} />
-                        <AvatarFallback>{wizardState.creatorSummary.name.charAt(0)}</AvatarFallback>
-                      </Avatar>
-                      <div>
-                        <div className="flex items-center gap-2">
-                          <span className="font-semibold">{wizardState.creatorSummary.name}</span>
-                          <CheckCircle className="h-4 w-4 text-primary" />
-                        </div>
-                        <div className="text-sm text-muted-foreground">
-                          {wizardState.creatorSummary.followers} followers • {wizardState.creatorSummary.categories.join(", ")}
-                        </div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              )}
-
-              {/* Brief */}
-              <Card>
-                <CardContent className="pt-6">
-                  <h3 className="font-semibold text-lg mb-3">Campaign Brief</h3>
-                  <div className="space-y-2">
-                    <div className="flex justify-between text-sm">
-                      <span className="text-muted-foreground">Objective:</span>
-                      <span className="font-medium capitalize">{wizardState.objective}</span>
-                    </div>
-                    <div>
-                      <span className="text-sm text-muted-foreground">Brief:</span>
-                      <p className="text-sm mt-1 p-3 bg-muted/30 rounded-md">{wizardState.brief}</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              {/* Content */}
-              <Card>
-                <CardContent className="pt-6">
-                  <h3 className="font-semibold text-lg mb-3">Content</h3>
-                  {wizardState.contentType === 'upload' && wizardState.contentFilePreview && (
-                    <div className="flex items-center gap-2 text-sm">
-                      <Upload className="h-4 w-4 text-muted-foreground" />
-                      <span className="text-muted-foreground">Upload:</span>
-                      <span className="font-medium">{wizardState.contentFilePreview.startsWith('blob:') ? 'File uploaded' : wizardState.contentFilePreview}</span>
-                    </div>
-                  )}
-                  {wizardState.contentType === 'link' && wizardState.contentLink && (
-                    <div className="flex items-center gap-2 text-sm">
-                      <LinkIcon className="h-4 w-4 text-muted-foreground" />
-                      <span className="text-muted-foreground">Link:</span>
-                      <a href={wizardState.contentLink} target="_blank" rel="noopener noreferrer" className="font-medium text-primary hover:underline break-all">
-                        {wizardState.contentLink}
-                      </a>
-                    </div>
-                  )}
-                </CardContent>
-              </Card>
-
-              {/* Budget */}
-              <Card>
-                <CardContent className="pt-6">
-                  <h3 className="font-semibold text-lg mb-3">Budget</h3>
-                  <div className="flex items-center gap-2">
-                    <IndianRupee className="h-5 w-5 text-muted-foreground" />
-                    <span className="text-2xl font-bold text-foreground">{formatINR(wizardState.budgetINR)}</span>
-                  </div>
-                </CardContent>
-              </Card>
-
-              {/* Targeting */}
-              <Card>
-                <CardContent className="pt-6">
-                  <h3 className="font-semibold text-lg mb-3">Targeting</h3>
-                  <div className="space-y-3">
-                    <div className="flex items-center gap-2 text-sm">
-                      <Users className="h-4 w-4 text-muted-foreground" />
-                      <span className="text-muted-foreground">Audience:</span>
-                      <span className="font-medium">{wizardState.audiencePreset}</span>
-                    </div>
-                    <div className="flex items-start gap-2 text-sm">
-                      <Target className="h-4 w-4 text-muted-foreground mt-0.5" />
-                      <span className="text-muted-foreground">Platforms:</span>
-                      <span className="font-medium">{wizardState.platforms.join(", ")}</span>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              {/* Launch Button */}
-              <Card className="bg-primary/5 border-primary/20">
-                <CardContent className="pt-6">
-                  <Button 
-                    onClick={handleLaunchCampaign}
-                    size="lg" 
-                    className="w-full"
-                  >
-                    Launch Campaign
-                  </Button>
-                  <p className="text-xs text-center text-muted-foreground mt-3">
-                    No backend connected yet — this will log the campaign state
-                  </p>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-        );
-
       default:
         return (
           <Card>
@@ -906,9 +428,6 @@ export default function CreateCampaignWizardPage() {
                 disabled={
                   (currentStep === 1 && !isStep1Valid) ||
                   (currentStep === 2 && !isStep2Valid) ||
-                  (currentStep === 3 && !isStep3Valid) ||
-                  (currentStep === 4 && !isStep4Valid) ||
-                  (currentStep === 5 && !isStep5Valid) ||
                   currentStep === steps.length
                 }
               >
