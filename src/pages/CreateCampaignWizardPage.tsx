@@ -13,6 +13,7 @@ import { useSearchParams } from "react-router-dom";
 import { creators, Creator } from "@/data/creators";
 import { Star, Instagram, MapPin, CheckCircle, X, ChevronLeft, ChevronRight, Upload, Link as LinkIcon, IndianRupee, Target, Users } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { creatorIdParamSchema } from "@/lib/validation-schemas";
 
 const steps = [
   { id: 1, name: "Creator" },
@@ -95,29 +96,32 @@ export default function CreateCampaignWizardPage() {
       }
     }
     
-    // Check for URL parameter
+    // Check for URL parameter with validation
     const creatorIdParam = searchParams.get("creatorId");
     if (creatorIdParam) {
-      const creatorId = parseInt(creatorIdParam);
-      const creator = creators.find(c => c.id === creatorId);
-      if (creator) {
-        return {
-          creatorId: creator.id,
-          creatorSummary: {
-            name: creator.name,
-            avatar: creator.avatar,
-            followers: creator.followers,
-            categories: creator.categories,
-          },
-          objective: "awareness",
-          brief: "",
-          contentType: 'upload',
-          contentFilePreview: "",
-          contentLink: "",
-          budgetINR: 0,
-          audiencePreset: 'India',
-          platforms: [],
-        };
+      const parsed = creatorIdParamSchema.safeParse(creatorIdParam);
+      if (parsed.success) {
+        const creatorId = parsed.data;
+        const creator = creators.find(c => c.id === creatorId);
+        if (creator) {
+          return {
+            creatorId: creator.id,
+            creatorSummary: {
+              name: creator.name,
+              avatar: creator.avatar,
+              followers: creator.followers,
+              categories: creator.categories,
+            },
+            objective: "awareness",
+            brief: "",
+            contentType: 'upload',
+            contentFilePreview: "",
+            contentLink: "",
+            budgetINR: 0,
+            audiencePreset: 'India',
+            platforms: [],
+          };
+        }
       }
     }
     
